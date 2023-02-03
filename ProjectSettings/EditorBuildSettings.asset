@@ -6,6 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/0-Menu.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/1-Eggs.unity
+    guid: 189684fb5f713514d820932746ecb528
+  - enabled: 1
+    path: Assets/Scenes/2-Tutorial.unity
+    guid: ced80ffa54e60f947a7a04e3a46e2903
+  - enabled: 1
+    path: Assets/Scenes/3-BattleRoom.unity
+    guid: 02069e5871716a24fae4cf03785ef546
+  - enabled: 1
+    path: Assets/Scenes/4-LootRoom.unity
+    guid: 1c9965f360a37ca4d841dd494c041c37
+  - enabled: 1
+    path: Assets/Scenes/5-Map.unity
+    guid: 02b5b55251652da4ba57f85e8b531d99
+  - enabled: 1
+    path: Assets/Scenes/6-Babymaker.unity
+    guid: e8bf31bb2bfbf474885d381c26dd7a59
+  - enabled: 1
+    path: Assets/Scenes/7-Death.unity
+    guid: 65c61ec464a0646489c8c20ea4ab2d2c
   m_configObjects: {}
