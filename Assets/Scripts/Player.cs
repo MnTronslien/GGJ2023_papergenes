@@ -8,29 +8,98 @@ public class Player : MonoBehaviour
     private NavMeshAgent _agent;
     public NavMeshAgent agent { get { if (_agent == null) _agent = GetComponent<NavMeshAgent>(); return _agent; } }
 
+    public Animator animator;
     public float turnThreshold;
 
+    [Header("Stats")]
+    public float currentHealth;
+    public int maxHealth { get { return 100; } } //Get from body parts
+
+    private float dir;
+    private Vector3 lastDir;
     private float lastX;
+    private bool isDashing;
+
+    public static UnityEngine.Events.UnityAction<float> onDamage;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        dir = 1;
+        currentHealth = maxHealth;
+        onDamage?.Invoke(1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(transform.position + new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
-        transform.rotation = Quaternion.identity;
+        if (!isDashing)
+        {
+            agent.SetDestination(transform.position + new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
+            animator.transform.rotation = Quaternion.identity;
 
-        var dir = lastX -  transform.position.x;
-        transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, Mathf.Abs(dir) > turnThreshold && dir > 0 ? -1 : 1, Time.deltaTime * agent.angularSpeed), 1, 1);
+            var d = (lastX - transform.position.x) * 10f;
+            if (Mathf.Abs(d) > turnThreshold)
+                dir = d >= 0 ? -1 : 1;
+
+            if (Input.GetButtonDown("Fire1"))
+                GetHit(1);
+            if (Input.GetButtonDown("Fire2"))
+                GetHit(5);
+            if (Input.GetButtonDown("Legs"))
+                Dash(transform.position - lastDir);
+            if (Input.GetButtonDown("Head"))
+                Special();
+        }
+
+        transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, dir, Time.deltaTime * agent.angularSpeed), 1, 1);
+
+        animator.SetFloat("Speed", Mathf.Abs(lastX - transform.position.x) * 10f);
         lastX = transform.position.x;
+        lastDir = transform.position;
+
+        if(currentHealth > 0 && currentHealth < maxHealth)
+        {
+            currentHealth += Time.deltaTime;
+        }
     }
 
-    private void LateUpdate()
+    private void GetHit(int damage)
+    {
+        animator.SetTrigger("Hit");
+
+        currentHealth -= damage;
+
+        if(currentHealth <= 0)
+        {
+            onDamage?.Invoke(0);
+        } else
+        {
+            onDamage?.Invoke((float)currentHealth / (float)maxHealth);
+        }       
+    }
+
+    private void Dash(Vector3 dir)
     {
         
+        StartCoroutine(DoDash(dir));
+    }
+
+    private void Special()
+    {
+
+    }
+
+    private IEnumerator DoDash(Vector3 dir)
+    {
+        isDashing = true;
+        float t = 0;
+        while(t < 0.1f)
+        {
+            agent.Move(dir.normalized * 0.1f);
+            t += Time.deltaTime;
+            yield return null;
+        }
+        isDashing = false;
     }
 }
