@@ -52,6 +52,13 @@ MonoBehaviour:
   turnThreshold: 0.01
   hitSound: {fileID: 11400000, guid: 99c254461a118d64e8991dd7e35bda2a, type: 2}
   currentHealth: 0
+  genome:
+    BodyGene: {fileID: 0}
+    HeadGene: {fileID: 0}
+    LegsGene: {fileID: 0}
+    LeftArmGene: {fileID: 3167153162701803828, guid: 68993365413154c4893cf8144a44c027,
+      type: 3}
+    RightArmGene: {fileID: 0}
 --- !u!136 &3307664424056048183
 CapsuleCollider:
   m_ObjectHideFlags: 0

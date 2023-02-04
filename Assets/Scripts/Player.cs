@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     public float currentHealth;
     public int maxHealth { get { return 100; } } //Get from body parts
 
+    public Genome genome;
+
     private float dir;
     private Vector3 lastDir;
     private float lastX;
@@ -43,8 +45,15 @@ public class Player : MonoBehaviour
             if (Mathf.Abs(d) > turnThreshold)
                 dir = d >= 0 ? -1 : 1;
 
-            if (Input.GetButtonDown("Fire1"))
-                GetHit(1);
+            if (Input.GetButtonDown("Fire1")){
+                //TODO: Move instantiation to start, this is just for debugging if they work
+                GameObject go = Instantiate(genome.LeftArmGene, transform.position, Quaternion.identity);
+                go.GetComponent<GeneExpression>().Act();
+                Destroy(go);
+
+            }
+
+                
             if (Input.GetButtonDown("Fire2"))
                 GetHit(5);
             if (Input.GetButtonDown("Legs"))

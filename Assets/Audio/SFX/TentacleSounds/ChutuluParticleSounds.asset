@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 638112f4b33acd44f8f1b8336ee4636a, type: 3}
+  m_Name: ChutuluParticleSounds
+  m_EditorClassIdentifier: 
+  clips:
+  - {fileID: 8300000, guid: 59a5ad8acc3c86e4880b7c0c6a3a637f, type: 3}
+  - {fileID: 8300000, guid: f8d0a5ba8d428254188ee5cc37dc98f5, type: 3}
+  - {fileID: 8300000, guid: 5a5a8f606bb5dbf409cfdbc8ddd430a8, type: 3}
+  - {fileID: 8300000, guid: 190c4d3dd16446b42b5aa67ac033f721, type: 3}
+  - {fileID: 8300000, guid: 9f89586d0a42d8a459e091b9c0e23fae, type: 3}
+  - {fileID: 8300000, guid: 55a6c9e7ab3feda4e9f14667ec8e7d69, type: 3}
+  - {fileID: 8300000, guid: 7416481b675629a45a9db7dd0b6d1fe1, type: 3}
+  lastPlayed: -1

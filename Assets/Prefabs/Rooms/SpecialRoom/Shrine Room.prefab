@@ -1304,6 +1304,7 @@ MonoBehaviour:
   mainDoor: {fileID: 7832972190269524371}
   bonusDoor: {fileID: 0}
   doorOpenSound: {fileID: 8300000, guid: 57bf1bfe4591a8e428d02fccb85144ff, type: 3}
+  doorMoveFinishOffset: 0.5
 --- !u!1 &7832972190269524373
 GameObject:
   m_ObjectHideFlags: 0
