@@ -50,6 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3053480948318115588}
   turnThreshold: 0.01
+  hitSound: {fileID: 11400000, guid: 99c254461a118d64e8991dd7e35bda2a, type: 2}
+  currentHealth: 0
 --- !u!136 &3307664424056048183
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -235,7 +237,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3053480948318115588
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -252,7 +254,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &8545780524740262685
 GameObject:
   m_ObjectHideFlags: 0

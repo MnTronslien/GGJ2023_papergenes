@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     public Animator animator;
     public float turnThreshold;
+    public SoundEffect hitSound;
 
     [Header("Stats")]
     public float currentHealth;
@@ -67,6 +68,7 @@ public class Player : MonoBehaviour
     private void GetHit(int damage)
     {
         animator.SetTrigger("Hit");
+        hitSound.PlaySoundEffect(1 , transform.position);
 
         currentHealth -= damage;
 

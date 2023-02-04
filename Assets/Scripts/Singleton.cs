@@ -13,6 +13,11 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
+//If not in play mode return null
+            if (!Application.isPlaying)
+                return null;
+
+
             if (_instance != null) return _instance;
 
             //if private instance is null, try to find a match in the scene
