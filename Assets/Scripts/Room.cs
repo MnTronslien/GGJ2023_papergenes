@@ -60,6 +60,7 @@ public class Room : MonoBehaviour
     {
         float t = 1;
         float duration = doorOpenSound.length - doorMoveFinishOffset;
+        doorOpenSound.PlayOneShot(1, door.transform.position);
         while (t > duration)
         {
             door.percent = t/duration; //Normalize t to 0-1
