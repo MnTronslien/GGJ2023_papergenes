@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+    public SlideAnimation entryDoor;
     public SlideAnimation mainDoor;
     public SlideAnimation bonusDoor;
 
@@ -13,13 +14,17 @@ public class Room : MonoBehaviour
 
     public int Init()
     {
+        if(entryDoor != null)
+            StartCoroutine(DoCloseDoor(entryDoor));
+
         //return monster count
         return 0;
     }
 
     public void OpenDoor()
     {
-        StartCoroutine(DoOpenDoor(mainDoor));
+        if(mainDoor!=null)
+            StartCoroutine(DoOpenDoor(mainDoor));
     }
 
     public void OpenBonus()
@@ -41,5 +46,20 @@ public class Room : MonoBehaviour
             t += Time.deltaTime * doorSpeed;
             yield return null;
         }
+        door.precent = 1;
+    }
+
+
+
+    IEnumerator DoCloseDoor(SlideAnimation door)
+    {
+        float t = 1;
+        while (t > 0)
+        {
+            door.precent = t;
+            t -= Time.deltaTime * doorSpeed;
+            yield return null;
+        }
+        door.precent = 0;
     }
 }
