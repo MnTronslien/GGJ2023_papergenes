@@ -8,7 +8,9 @@ public class Room : MonoBehaviour
     public SlideAnimation mainDoor;
     public SlideAnimation bonusDoor;
 
-    public float doorSpeed;
+    public AudioClip doorOpenSound;
+    [Tooltip("How much sooner than the sound should the door finish animating")]
+    public float doorMoveFinishOffset = 0.5f;
 
     //TODO bonus door requirements
 
@@ -21,6 +23,7 @@ public class Room : MonoBehaviour
         return 0;
     }
 
+    [ContextMenu("Open Door")]
     public void OpenDoor()
     {
         if(mainDoor!=null)
@@ -40,10 +43,12 @@ public class Room : MonoBehaviour
     IEnumerator DoOpenDoor(SlideAnimation door)
     {
         float t = 0;
-        while (t < 1)
+        doorOpenSound.PlayOneShot(1, door.transform.position);
+        float duration = doorOpenSound.length - doorMoveFinishOffset;
+        while (t < duration)
         {
-            door.percent = t;
-            t += Time.deltaTime * doorSpeed;
+            door.percent = t/duration; //Normalize t to 0-1
+            t += Time.deltaTime;
             yield return null;
         }
         door.percent = 1;
@@ -53,12 +58,12 @@ public class Room : MonoBehaviour
 
     IEnumerator DoCloseDoor(SlideAnimation door)
     {
-        
         float t = 1;
-        while (t > 0)
+        float duration = doorOpenSound.length - doorMoveFinishOffset;
+        while (t > duration)
         {
-            door.percent = t;
-            t -= Time.deltaTime * doorSpeed;
+            door.percent = t/duration; //Normalize t to 0-1
+            t -= Time.deltaTime * doorOpenSound.length;
             yield return null;
         }
         door.percent = 0;

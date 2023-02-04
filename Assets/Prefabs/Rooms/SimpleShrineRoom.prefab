@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 7400000, guid: 9f3f6b271d2766c47a43c1b440799a44, type: 2}
-  precent: 0
+  percent: 0
 --- !u!1 &2524081860826261236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,7 +1679,8 @@ MonoBehaviour:
   entryDoor: {fileID: 3685407116285693910}
   mainDoor: {fileID: 7832972190269524371}
   bonusDoor: {fileID: 4827023566216244819}
-  doorSpeed: 0.2
+  doorOpenSound: {fileID: 8300000, guid: 57bf1bfe4591a8e428d02fccb85144ff, type: 3}
+  doorMoveFinishOffset: 0.5
 --- !u!1 &7832972190269524373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1727,7 +1728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 7400000, guid: 9f3f6b271d2766c47a43c1b440799a44, type: 2}
-  precent: 0
+  percent: 0
 --- !u!1 &7865783453764356722
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,7 +1873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 7400000, guid: 9f3f6b271d2766c47a43c1b440799a44, type: 2}
-  precent: 0
+  percent: 0
 --- !u!1 &8666608612476180145
 GameObject:
   m_ObjectHideFlags: 0
