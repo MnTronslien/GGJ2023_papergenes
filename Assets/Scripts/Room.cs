@@ -42,24 +42,25 @@ public class Room : MonoBehaviour
         float t = 0;
         while (t < 1)
         {
-            door.precent = t;
+            door.percent = t;
             t += Time.deltaTime * doorSpeed;
             yield return null;
         }
-        door.precent = 1;
+        door.percent = 1;
     }
 
 
 
     IEnumerator DoCloseDoor(SlideAnimation door)
     {
+        
         float t = 1;
         while (t > 0)
         {
-            door.precent = t;
+            door.percent = t;
             t -= Time.deltaTime * doorSpeed;
             yield return null;
         }
-        door.precent = 0;
+        door.percent = 0;
     }
 }
