@@ -4,22 +4,46 @@ using UnityEngine;
 
 public class SceneBattle : GameScene
 {
-    public SlideAnimation door;
-    public float doorSpeed;
+    public Room[] rooms;
+
+    [Header("pr")]
+    public Room room;
+    public int enemyCount;
+
+    private bool hasEnded;
 
     private void Start()
     {
-        StartCoroutine(OpenDoor()); 
+        int r = Random.Range(0, rooms.Length);
+        room = Instantiate(rooms[r]);
+        enemyCount = room.Init();
+        hasEnded = false;
+
+        Player.onDamage += OnPlayerHurt;
     }
 
-    IEnumerator OpenDoor()
+    private void OnDestroy()
     {
-        float t = 0;
-        while (t < 1)
+        Player.onDamage -= OnPlayerHurt;
+    }
+
+    private void Update()
+    {
+        if(enemyCount <= 0 && !hasEnded)
         {
-            door.precent = t;
-            t += Time.deltaTime * doorSpeed;
-            yield return null;
+            hasEnded = true;
+
+            room.OpenDoor();
+            room.OpenBonus();
+        }
+    }
+
+    void OnPlayerHurt(float percent)
+    {
+        if(percent <= 0)
+        {
+            //TODO Death animation first
+            GotoScene(7);
         }
     }
 }
