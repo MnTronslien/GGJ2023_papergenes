@@ -9,12 +9,10 @@ public class Genome
 {
 
     //Genome
-    public GeneExpression
-    BodyGene,
-    HeadGene,
-    LegsGene,
-    LeftArmGene,
-    RightArmGene;
+    public Torso BodyGene;
+    public Leg LegsGene;
+    public GeneExpression HeadGene;
+    public Arm LeftArmGene, RightArmGene;
 
     //Gene strenght with default as neutral
     private GeneStrength

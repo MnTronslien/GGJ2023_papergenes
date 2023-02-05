@@ -30,7 +30,22 @@ public class Player : MonoBehaviour
             GlobalInfo.playerGenome = GlobalInfo.instance.startingGenome;
             GlobalInfo.currentHealth = GlobalInfo.instance.startingGenome.GetMaxHealth();
         }
-        
+
+        Leg l = Instantiate(GlobalInfo.playerGenome.LegsGene, animator.transform, false);
+        Torso t = Instantiate(GlobalInfo.playerGenome.BodyGene, l.torsoPos.position, Quaternion.identity, l.transform);
+        GeneExpression h = Instantiate(GlobalInfo.playerGenome.HeadGene, t.Head.position, Quaternion.identity, t.transform);
+        GeneExpressionFlippable f = Instantiate(GlobalInfo.playerGenome.LeftArmGene, t.FrontArm.position, Quaternion.identity, t.transform);
+        GeneExpressionFlippable b = Instantiate(GlobalInfo.playerGenome.RightArmGene, t.BackArm.position, Quaternion.identity, t.transform);
+
+        f.back.SetActive(false);
+        b.front.SetActive(false);
+
+        l.name = "Legs";
+        t.name = "Torso";
+        h.name = "Head";
+        f.name = "Front";
+        b.name = "Back";
+
         onDamage?.Invoke((float)GlobalInfo.currentHealth / (float)GlobalInfo.instance.startingGenome.GetMaxHealth());
     }
 
@@ -80,7 +95,7 @@ public class Player : MonoBehaviour
                 GetHit(5);
         }
 
-        transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, dir, Time.deltaTime * agent.angularSpeed), 1, 1);
+        transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, dir, Time.deltaTime * agent.angularSpeed), 1, 1);        
 
         animator.SetFloat("Speed", Mathf.Abs(lastX - transform.position.x) * 10f);
         lastX = transform.position.x;

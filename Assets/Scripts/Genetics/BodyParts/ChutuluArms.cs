@@ -3,13 +3,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ChutuluArms : GeneExpression
+public class ChutuluArms : Arm
 {
-
-    public float length = 5;
     public float width = 0.2f;
 
-    public int damage = 1;
+    
 
     public GameObject hitboxEffect;
     public SoundEffect particleSound;
