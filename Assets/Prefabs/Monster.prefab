@@ -107,6 +107,7 @@ MonoBehaviour:
     LeftArmGene: {fileID: 0}
     RightArmGene: {fileID: 0}
   player: {fileID: 0}
+  agent: {fileID: 1565808495}
   animator: {fileID: 3053480948318115588}
 --- !u!1 &3447908672973636834
 GameObject:
