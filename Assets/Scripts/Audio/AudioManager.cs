@@ -6,9 +6,13 @@ using System.Collections.Generic;
 
 public class AudioManager : Singleton<AudioManager>
 {
-
+    [Range(0, 1)]
     public static float musicVolume = 1;
     public static float sfxVolume = 1;
+
+    //Track with layers
+    public MusicTrack currentMusicTrack;
+    [HideInInspector] public List<AudioSource> musicTrackLayers = new List<AudioSource>();
 
 
     public List<AudioSource> sfxTracks = new List<AudioSource>();
@@ -23,6 +27,67 @@ public class AudioManager : Singleton<AudioManager>
     public void SetSFXVolume(float volume)
     {
         sfxVolume = volume;
+    }
+
+    //Make a method to apply music track presets to current music track
+    //The method should find the preset based on name
+    //Then apply the preset to the current music track
+    public void ApplyMusicTrackPreset(string presetName, float duration = 2)
+    {
+        //Find the preset
+        VolumePreset preset = currentMusicTrack.LayerPresets.Find(x => x.Name.ToLower() == presetName.ToLower());
+        if (preset == null)
+        {
+            Debug.LogWarning($"No preset found with name {presetName}");
+            return;
+        }
+
+        //save the preset applied
+        currentMusicTrack.currentPreset = preset;
+        //For each layer in the current music track,
+        // Fade the volume to the preset volume
+        for (int i = 0; i < currentMusicTrack.Layers.Length; i++)
+        {
+            FadeMusicLayerVolumeToPresetVolume(i, preset.LayerVolume[i], duration);
+        }   
+    }
+
+    private async void FadeMusicLayerVolumeToPresetVolume(int layerID, float presetVolume, float duration)
+    {
+        //loop that fades
+        float t = 0;
+        float startVolume = musicTrackLayers[layerID].volume;
+        while (t < duration)
+        {
+            //Check if still in play mode
+            if (!Application.isPlaying) return;
+            musicTrackLayers[layerID].volume = Mathf.Lerp(startVolume, presetVolume, t / duration);
+            t += Time.deltaTime;
+            await Task.Delay(1);
+        }
+    }
+
+    //Context menu method to cycle presets
+    [ContextMenu("Cycle Preset")]
+    public void CyclePreset()
+    {
+        //Find the index of the current preset
+        int index = currentMusicTrack.LayerPresets.IndexOf(currentMusicTrack.currentPreset);
+        //If the index is the last preset, set the index to 0
+        if (index == currentMusicTrack.LayerPresets.Count - 1)
+            index = 0;
+        //Otherwise, increment the index
+        else
+            index++;
+        //Apply the preset at the index
+        ApplyMusicTrackPreset(currentMusicTrack.LayerPresets[index].Name);
+    }
+
+    //Make a method to reload the current music track
+    [ContextMenu("Reload Current Music Track")]
+    public void ReloadCurrentMusicTrack()
+    {
+        currentMusicTrack.PlayMusicTrack(1);
     }
 }
 
@@ -54,51 +119,13 @@ public static class AudioExtensions
         AudioManager.Instance.sfxTracks.Add(source);
         source.clip = clip;
         source.volume = volume * AudioManager.sfxVolume;
+        source.spatialBlend = 1;
         source.Play();
         await Task.Delay((int)(clip.length * 1000));
-        if (!Application.isPlaying)
-            return;
+        if (!Application.isPlaying) return; //Because of await we might have exited the game
         AudioManager.Instance.sfxTracks.Remove(source);
         Object.Destroy(go);   
     }
-//Play oneshot tracking a transform
-    public static async void PlayOneShot(this AudioClip clip, float volume, Transform track)
-    {
-        //Discard if not in play mode
-        if (!Application.isPlaying)
-        {
-            Debug.LogWarning("Not in play mode, discarding");
-            return;
-        }
-        //Block if not any more tracks available, discard if way to many
-        while (AudioManager.Instance.sfxTracks.Count >= AudioManager.maxSFXTracks)
-        {
-            await Task.Delay(100);
-            if (AudioManager.Instance.sfxTracks.Count > AudioManager.maxSFXTracks * 2)
-            {
-                Debug.LogWarning("Too many SFX tracks, discarding");
-                return;
-            }
-        }
-
-
-        GameObject go = new GameObject($"OneShotAudio: {clip.name}");
-        Debug.Log($"Playing {clip.name} at {track.position}");
-        go.transform.position = track.position;
-        AudioSource source = go.AddComponent<AudioSource>();
-        AudioManager.Instance.sfxTracks.Add(source);
-        source.clip = clip;
-        source.volume = volume * AudioManager.sfxVolume;
-        source.Play();
-        while (source.isPlaying)
-        {
-            go.transform.position = track.position;
-            await Task.Delay(100);
-        }
-        AudioManager.Instance.sfxTracks.Remove(source);
-        Object.Destroy(go);
-    }
-
 
     //Play one shot at random from list of clips
     public static void PlayOneShot(this AudioClip[] clips, float volume, Vector3 worldSpacePos)
@@ -121,6 +148,40 @@ public static class AudioExtensions
         effect.lastPlayed = index;
         effect.clips.PlayOneShot(volume, worldSpacePos);
     }
+
+
+    //Make a static public method that plays a music track
+    public static void PlayMusicTrack(this MusicTrack track, float volume = 1)
+    {
+        //If there is any musictracklayers playing, destroy them all
+        if (AudioManager.Instance.musicTrackLayers.Count > 0)
+        {
+            foreach (AudioSource source in AudioManager.Instance.musicTrackLayers)
+            {
+                Object.Destroy(source.gameObject);
+            }
+            AudioManager.Instance.musicTrackLayers.Clear();
+        }
+
+        //Create a new game object for each layer
+        foreach (AudioClip layer in track.Layers)
+        {
+            GameObject go = new GameObject($"MusicTrackLayer: {layer.name}");
+            go.transform.position = Vector3.zero;
+            //attach to audio manager so they become DoNOtDestroyOnLoad
+            go.transform.SetParent(AudioManager.Instance.transform);
+            AudioSource source = go.AddComponent<AudioSource>();
+            AudioManager.Instance.musicTrackLayers.Add(source);
+            source.clip = layer;
+            source.volume = volume * AudioManager.musicVolume;
+            source.loop = true;
+            source.spatialBlend = 0;
+            source.Play();
+        }
+    }
+
+
+
     
 }
 
