@@ -14,7 +14,7 @@ public class Monster : MonoBehaviour
     public Animator animator;
 
 
-    
+
     Leg legs;
     Torso torso;
     GeneExpression head;
@@ -24,22 +24,24 @@ public class Monster : MonoBehaviour
     //Maximum attack didtance is calculated from the longest reach of both arms
     private float MaxAttackDistance => Mathf.Max(genome.LeftArmGene.length, genome.RightArmGene.length);
     private float MinAttackDistance => Mathf.Min(genome.LeftArmGene.length, genome.RightArmGene.length);
-    
+
+    Task UpdataLoop = null;
+
     void Start()
     {
 
 
         NameMonster();
-//Get the player
+        //Get the player
         player = FindAnyObjectByType<Player>().gameObject;
         //TODO: Spawn Body from geneome
 
-        if(genome.BodyGene == null)
+        if (genome.BodyGene == null)
         {
             genome = Genome.CreateRandomGenome();
         }
 
-        if(animator != null)
+        if (animator != null)
         {
             legs = Instantiate(GlobalInfo.playerGenome.LegsGene, animator.transform, false);
             torso = Instantiate(GlobalInfo.playerGenome.BodyGene, legs.torsoPos.position, Quaternion.identity, legs.transform);
@@ -56,8 +58,14 @@ public class Monster : MonoBehaviour
             leftArm.name = "Front";
             rightArm.name = "Back";
         }
-        
+
+        UpdataLoop = AsyncUpdate();
+
     }
+
+
+
+
 
     private void NameMonster()
     {
@@ -85,47 +93,33 @@ public class Monster : MonoBehaviour
     "Howler",
     "Rampager"
 };
-name = monsterNames[UnityEngine.Random.Range(0, monsterNames.Count)];
+        name = monsterNames[UnityEngine.Random.Range(0, monsterNames.Count)];
     }
 
-    async void Update()
+    private async Task AsyncUpdate()
     {
-        if (agent == null)
-            return;
-
-        //Move towards the player and wait until we are close enough to attack
-        agent.SetDestination(player.transform.position);
-        while (Vector3.Distance(transform.position, player.transform.position) > MaxAttackDistance)
+        while (gameObject != null)
         {
-            await Task.Delay(100);
-            if (!Application.isPlaying) return; 
-            if(this == null) return;   
-        }
-    //STop moving
-        agent.isStopped = true;
+            if (agent == null)
+                return;
 
-        //Calculate aim direction
-        Vector3 aimDir = player.transform.position - transform.position;
+            //Move towards the player and wait until we are close enough to attack
+            agent.SetDestination(player.transform.position);
+            while (Vector3.Distance(transform.position, player.transform.position) > MaxAttackDistance)
+            {
+                await Task.Delay(100);
+                if (!Application.isPlaying) return;
+                if (this == null) return;
+            }
+            //Stop moving
+            agent.isStopped = true;
+
+            //Calculate aim direction
+            Vector3 aimDir = player.transform.position - transform.position;
 
 
-        //Now that you are close enough, attack with the longest ranged attack
-        if (leftArm.length > rightArm.length)
-        {
-           await leftArm.Act(aimDir);
-        }
-        else
-        {
-           await rightArm.Act(aimDir);
-        }
-        //Await a short delay
-        await Task.Delay(1500);
-        //Break if not in play mode
-        if (!Application.isPlaying) return;
-        if (this == null) return;
-        //If the minimum attack is also in range, then attack with that too
-        if (Vector3.Distance(transform.position, player.transform.position) < MinAttackDistance)
-        {
-            if (leftArm.length < rightArm.length)
+            //Now that you are close enough, attack with the longest ranged attack
+            if (leftArm.length > rightArm.length)
             {
                 await leftArm.Act(aimDir);
             }
@@ -133,12 +127,28 @@ name = monsterNames[UnityEngine.Random.Range(0, monsterNames.Count)];
             {
                 await rightArm.Act(aimDir);
             }
+            //Await a short delay
+            await Task.Delay(1000);
+            //Break if not in play mode
+            if (!Application.isPlaying) return;
+            if (this == null) return;
+            //If the minimum attack is also in range, then attack with that too
+            if (Vector3.Distance(transform.position, player.transform.position) < MinAttackDistance)
+            {
+                if (leftArm.length < rightArm.length)
+                {
+                    await leftArm.Act(aimDir);
+                }
+                else
+                {
+                    await rightArm.Act(aimDir);
+                }
+            }
+            await Task.Delay(500);
+            //Break if not in play mode
+            if (!Application.isPlaying) return;
+            if (this == null) return;
         }
-        await Task.Delay(1500);
-        //Break if not in play mode
-        if (!Application.isPlaying) return;
-        if (this == null) return;
-
     }
     public void OnDestroy()
     {
@@ -151,5 +161,6 @@ name = monsterNames[UnityEngine.Random.Range(0, monsterNames.Count)];
         {
             room.enemyCount--;
         }
+
     }
 }
