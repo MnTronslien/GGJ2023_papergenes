@@ -46,10 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cabdfa6153ed4e4586d7b82e90e3257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   health: 0
   front: {fileID: 3220156214797041743}
   back: {fileID: 699695348709542032}
-  length: 1
+  length: 3
   damage: 5
   attckCooldown: 2
   hitboxEffect: {fileID: 769987705865654616, guid: 4775e681bb45882419125920f0722fe9,

@@ -91,7 +91,8 @@ name = monsterNames[UnityEngine.Random.Range(0, monsterNames.Count)];
         while (Vector3.Distance(transform.position, player.transform.position) > MaxAttackDistance)
         {
             await Task.Delay(100);
-            if (!Application.isPlaying) return;    
+            if (!Application.isPlaying) return; 
+            if(this == null) return;   
         }
     //STop moving
         agent.isStopped = true;
@@ -110,9 +111,10 @@ name = monsterNames[UnityEngine.Random.Range(0, monsterNames.Count)];
            await rightArm.Act(aimDir);
         }
         //Await a short delay
-        await Task.Delay(500);
+        await Task.Delay(1500);
         //Break if not in play mode
         if (!Application.isPlaying) return;
+        if (this == null) return;
         //If the minimum attack is also in range, then attack with that too
         if (Vector3.Distance(transform.position, player.transform.position) < MinAttackDistance)
         {
@@ -128,13 +130,19 @@ name = monsterNames[UnityEngine.Random.Range(0, monsterNames.Count)];
         await Task.Delay(1500);
         //Break if not in play mode
         if (!Application.isPlaying) return;
+        if (this == null) return;
 
     }
     public void OnDestroy()
     {
-        if (!Application.isPlaying) return;
+
         //Destroy the monster
         //Find room script and tell it that we died
-        FindAnyObjectByType<Room>().enemyCount--;
+        var room = FindAnyObjectByType<Room>();
+        //If room exist then tell it that we died
+        if (room != null)
+        {
+            room.enemyCount--;
+        }
     }
 }

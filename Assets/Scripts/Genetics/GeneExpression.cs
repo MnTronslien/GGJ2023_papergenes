@@ -6,6 +6,7 @@ public class GeneExpression : MonoBehaviour
 {
     //Method for making this component doe what is does, abstract
     public virtual async Task Act(Vector3 direction) { }
+public bool isPlayer = false;
 
     public float health;
 }

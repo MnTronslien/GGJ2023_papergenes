@@ -53,6 +53,6 @@ MonoBehaviour:
       type: 3}
     LeftArmGene: {fileID: 1885695284974694993, guid: e24c73365efccc5408caea68d7768b30,
       type: 3}
-    RightArmGene: {fileID: 1885695284974694993, guid: 0a08d74a4f34637499f19c559c4a0138,
+    RightArmGene: {fileID: 4134995518992493722, guid: 0a08d74a4f34637499f19c559c4a0138,
       type: 3}
   gameTrack: {fileID: 11400000, guid: 05544c3715e526042a8557bffca26902, type: 2}

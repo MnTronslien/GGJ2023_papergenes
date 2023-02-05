@@ -49,6 +49,12 @@ public class Player : MonoBehaviour
         leftArm.back.SetActive(false);
         rightArm.front.SetActive(false);
 
+        legs.isPlayer = true;
+        torso.isPlayer = true;
+        head.isPlayer = true;
+        leftArm.isPlayer = true;
+        rightArm.isPlayer = true;
+
         legs.name = "Legs";
         torso.name = "Torso";
         head.name = "Head";

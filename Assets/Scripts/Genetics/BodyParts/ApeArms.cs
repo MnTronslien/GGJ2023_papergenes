@@ -22,7 +22,16 @@ public class ApeArms : Arm
 
         //Spawn a hitbox infront of the player in the aim direction
         Collider[] hitColliders = Physics.OverlapBox(
-            hitboxPosition, Vector3.one * length / 2, Quaternion.LookRotation(aimDirection));
+            hitboxPosition, Vector3.one * length / 2, Quaternion.LookRotation(aimDirection), isPlayer ? LayerMask.GetMask("Enemy") : LayerMask.GetMask("Player"));
+
+            //For each collider in the hitbox, check if it has helath and deal damage to it
+            foreach (Collider c in hitColliders)
+            {
+                if (c.GetComponent<Health>())
+                {
+                    c.GetComponent<Health>().TakeDamage(damage);
+                }
+            }
 
         //Spawn a partickle effect along the hitbox
         Instantiate(hitboxEffect, hitboxPosition, Quaternion.LookRotation(aimDirection));

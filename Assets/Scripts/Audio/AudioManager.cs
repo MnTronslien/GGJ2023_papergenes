@@ -13,11 +13,11 @@ public class AudioManager : Singleton<AudioManager>
     //Track with layers
     public MusicTrack currentMusicTrack;
     public VolumePreset Debug_VolumePreset;
+    public const int maxSFXTracks = 20;
     [HideInInspector] public List<AudioSource> musicTrackLayers = new List<AudioSource>();
 
 
     public List<AudioSource> sfxTracks = new List<AudioSource>();
-    public const int maxSFXTracks = 10;
 
 
     public void SetMusicVolume(float volume)
