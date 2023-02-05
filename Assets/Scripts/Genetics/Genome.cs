@@ -12,8 +12,7 @@ public class Genome
     public Torso BodyGene;
     public Leg LegsGene;
     public GeneExpression HeadGene;
-    public GeneExpressionFlippable LeftArmGene,
-    RightArmGene;
+    public Arm LeftArmGene, RightArmGene;
 
     //Gene strenght with default as neutral
     private GeneStrength

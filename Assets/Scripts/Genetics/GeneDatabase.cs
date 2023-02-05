@@ -9,7 +9,8 @@ public class GeneDatabase : ScriptableObject {
 
     public Torso[] BodyGenes;
     public Leg[] LegsGenes;
-    public GeneExpressionFlippable[] HeadGenes, ArmGenes;
+    public GeneExpression[] HeadGenes;
+    public Arm[] ArmGenes;
 
     public static Torso RandomBodyGene() {
         return GeneDatabase.instance.BodyGenes[Random.Range(0, GeneDatabase.instance.BodyGenes.Length)];
@@ -23,7 +24,7 @@ public class GeneDatabase : ScriptableObject {
         return GeneDatabase.instance.LegsGenes[Random.Range(0, GeneDatabase.instance.LegsGenes.Length)];
     }
 
-    public static GeneExpressionFlippable RandomArmGene() {
+    public static Arm RandomArmGene() {
         return GeneDatabase.instance.ArmGenes[Random.Range(0, GeneDatabase.instance.ArmGenes.Length)];
     }
 

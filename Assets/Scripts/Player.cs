@@ -32,13 +32,19 @@ public class Player : MonoBehaviour
         }
 
         Leg l = Instantiate(GlobalInfo.playerGenome.LegsGene, animator.transform, false);
-        Torso t = Instantiate(GlobalInfo.playerGenome.BodyGene, l.torsoPos.position, Quaternion.identity, animator.transform);
-        GeneExpression h = Instantiate(GlobalInfo.playerGenome.HeadGene, t.Head.position, Quaternion.identity, animator.transform);
-        GeneExpressionFlippable f = Instantiate(GlobalInfo.playerGenome.LeftArmGene, t.FrontArm.position, Quaternion.identity, animator.transform);
-        GeneExpressionFlippable b = Instantiate(GlobalInfo.playerGenome.RightArmGene, t.BackArm.position, Quaternion.identity, animator.transform);
+        Torso t = Instantiate(GlobalInfo.playerGenome.BodyGene, l.torsoPos.position, Quaternion.identity, l.transform);
+        GeneExpression h = Instantiate(GlobalInfo.playerGenome.HeadGene, t.Head.position, Quaternion.identity, t.transform);
+        GeneExpressionFlippable f = Instantiate(GlobalInfo.playerGenome.LeftArmGene, t.FrontArm.position, Quaternion.identity, t.transform);
+        GeneExpressionFlippable b = Instantiate(GlobalInfo.playerGenome.RightArmGene, t.BackArm.position, Quaternion.identity, t.transform);
 
         f.back.SetActive(false);
         b.front.SetActive(false);
+
+        l.name = "Legs";
+        t.name = "Torso";
+        h.name = "Head";
+        f.name = "Front";
+        b.name = "Back";
 
         onDamage?.Invoke((float)GlobalInfo.currentHealth / (float)GlobalInfo.instance.startingGenome.GetMaxHealth());
     }
