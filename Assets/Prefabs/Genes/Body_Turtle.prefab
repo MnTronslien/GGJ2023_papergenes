@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7523990838490225241}
   m_Layer: 0
-  m_Name: Front
+  m_Name: FrontPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288923419710757479300e7562f3ac1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   health: 50
   Head: {fileID: 7409430929060394252}
   FrontArm: {fileID: 7523990838490225241}
@@ -191,7 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7409430929060394252}
   m_Layer: 0
-  m_Name: Head
+  m_Name: HeadPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,7 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6431714793225408996}
   m_Layer: 0
-  m_Name: Back
+  m_Name: BackPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

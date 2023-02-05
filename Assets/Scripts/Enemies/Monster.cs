@@ -8,11 +8,11 @@ public class Monster : MonoBehaviour
 {
     public Genome genome;
     public GameObject player;
-
     public NavMeshAgent agent;
-
     public Animator animator;
 
+    public float charm;
+    public float charmTollerance = 5;
 
 
     Leg legs;
@@ -27,10 +27,8 @@ public class Monster : MonoBehaviour
 
     Task UpdataLoop = null;
 
-    void Start()
+    void Awake()
     {
-
-
         NameMonster();
         //Get the player
         player = FindAnyObjectByType<Player>().gameObject;
@@ -67,6 +65,14 @@ public class Monster : MonoBehaviour
 
         UpdataLoop = AsyncUpdate();
 
+        if (animator != null)
+            animator.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        if (animator != null)
+            animator.gameObject.SetActive(true);
     }
 
     private void Update()

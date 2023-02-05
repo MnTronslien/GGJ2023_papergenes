@@ -66,6 +66,13 @@ public class Player : MonoBehaviour
         head.name = "Head";
         leftArm.name = "Front";
         rightArm.name = "Back";
+
+        animator.gameObject.SetActive(false);
+    }
+
+    void Start()
+    {
+        animator.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -134,17 +141,22 @@ public class Player : MonoBehaviour
 
     private void HandleBreeding()
     {
-        isDancing = Input.GetKey(KeyCode.B);
+        isDancing = Input.GetKey(KeyCode.B) || (Input.GetButtonDown("Fire1") && Input.GetButtonDown("Fire2"));
         animator.SetBool("dance", isDancing);
-        if (isDancing)
+        var enemies = FindObjectsOfType<Monster>();
+        if (enemies.Length == 1)
         {
-            var enemies = FindObjectsOfType<Monster>();
-            if(enemies.Length == 1)
+            if (isDancing)
             {
-                //increase enemy.charm
-                //if charm is > enemy.charmResist
-                GlobalInfo.Offspring(Genome.CreateRandomGenome()); //TODO replace with enemy
-                UnityEngine.SceneManagement.SceneManager.LoadScene(6);
+                enemies[0].charm += Time.deltaTime;
+                if(enemies[0].charm >= enemies[0].charmTollerance)
+                {
+                    GlobalInfo.Offspring(enemies[0].genome);
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(6);
+                } 
+            } else
+            {
+                enemies[0].charm = 0;
             }
         }
     }
