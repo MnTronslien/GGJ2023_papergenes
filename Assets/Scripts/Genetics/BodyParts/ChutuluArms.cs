@@ -2,24 +2,22 @@
 
 using UnityEngine;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class ChutuluArms : Arm
 {
-    public float width = 0.2f;
-
-    
+    public float width = 0.2f; 
 
     public GameObject hitboxEffect;
     public SoundEffect particleSound;
     public SoundEffect attackSound;
 
-    public override void Act()
+    public override async Task Act(Vector3 aimDirection)
     {
         attackSound.PlaySoundEffect(1, transform.position);
         particleSound.PlaySoundEffect(1, transform.position);
         //Spawn a hitbox infront of the player in the aim direction
-        //Get the direction the player is aiming
-        Vector3 aimDirection = InputManager.Instance.CursorWorldPosition - transform.position;
+       
         //calculate how many hitboxes to spawn based on the total lenght and te width of the hitbox
         int hitboxCount = Mathf.CeilToInt(length / width);
         //Make list to put anything hit by the hitboxes in
@@ -53,6 +51,7 @@ public class ChutuluArms : Arm
             }
         }
      
-        
+    //Await atatck cooldown
+    await Task.Delay((int)(attckCooldown * 1000));
     }
 }
