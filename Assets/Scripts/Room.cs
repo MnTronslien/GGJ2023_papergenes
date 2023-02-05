@@ -38,7 +38,7 @@ public class Room : MonoBehaviour
         //TODO Monster logic
         //Then spawn monsters
         //Then count monsters in room (in case of pre-placed prefabs) and add to enemyCount
-        enemyCount = new List<Monster>(FindObjectsOfType<Monster>()).Count;
+        enemyCount = new List<Monster>(FindObjectsOfType<Monster>(false)).Count;
 
         GlobalInfo.canAttack = true;
         GlobalInfo.canWalk = true;
