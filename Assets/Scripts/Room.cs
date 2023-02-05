@@ -35,7 +35,7 @@ public class Room : MonoBehaviour
 
         //TODO walk character 2 steps
 
-//TODO Monster logic
+        //TODO Monster logic
         //Then spawn monsters
         //Then count monsters in room (in case of placed prefabs)
         //Then add a way for them to tell this script when they died
@@ -44,7 +44,7 @@ public class Room : MonoBehaviour
 
         GlobalInfo.canAttack = true;
         GlobalInfo.canWalk = true;
-
+        
         enemyCount = 100;
     }
 

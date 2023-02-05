@@ -9,7 +9,8 @@ public class SceneShrine : GameScene
     // Start is called before the first frame update
     void Start()
     {
-        room.Init();    
+        room.Init();
+        AudioManager.Instance.ApplyMusicTrackPreset("Shrine");    
     }
 
     // Update is called once per frame

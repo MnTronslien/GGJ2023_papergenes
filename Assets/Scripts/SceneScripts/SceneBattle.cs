@@ -19,6 +19,7 @@ public class SceneBattle : GameScene
         hasEnded = false;
 
         Player.onDamage += OnPlayerHurt;
+        AudioManager.Instance.ApplyMusicTrackPreset("Battle");
     }
 
     private void OnDestroy()
@@ -34,6 +35,7 @@ public class SceneBattle : GameScene
 
             room.OpenDoor();
             room.OpenBonus();
+            AudioManager.Instance.ApplyMusicTrackPreset("Idle");
         }
     }
 

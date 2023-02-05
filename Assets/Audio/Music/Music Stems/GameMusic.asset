@@ -22,6 +22,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1427655a04c474540a9edc299e4e0fbc, type: 3}
   - {fileID: 8300000, guid: 03d5fdcd682da8843a0bfd6ca3870075, type: 3}
   - {fileID: 8300000, guid: d63ed2e6eb91a4e45a7dfc6c2444b037, type: 3}
-  currentPreset: {fileID: 0}
+  currentPreset: {fileID: 11400000, guid: c5a7fbdc80d9a76429eb124d585f1343, type: 2}
   LayerCurrentVolumes: []
-  LayerPresets: []
+  LayerPresets:
+  - {fileID: 11400000, guid: 49aa1619840aa554ea0a70deefd9b93e, type: 2}
+  - {fileID: 11400000, guid: 666fe5835ea0e2f4aa25a2c1c18959ab, type: 2}
+  - {fileID: 11400000, guid: dbcb9e1a5919fc0409e213f5b771f3c4, type: 2}
+  - {fileID: 11400000, guid: ce392412449e8bf4f94f7070b81c6681, type: 2}
+  - {fileID: 11400000, guid: c5a7fbdc80d9a76429eb124d585f1343, type: 2}

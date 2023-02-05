@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fec2813b19886048a63bb363b1c49ab, type: 3}
   m_Name: Shrine
   m_EditorClassIdentifier: 
-  Name: 
   LayerVolume:
   - 0
-  - 0.75
+  - 0
   - 0
   - 1
   - 0

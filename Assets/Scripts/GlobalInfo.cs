@@ -29,6 +29,10 @@ public class GlobalInfo : MonoBehaviour
     // SETTINGS
     public Genome startingGenome;
 
+    //Music
+    public static MusicTrack gameTrack;
+
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -38,6 +42,9 @@ public class GlobalInfo : MonoBehaviour
         }
 
         instance = this;
+
+        gameTrack.PlayMusicTrack(0);
+
     }
 
     public static void Offspring(Genome partner)

@@ -12,6 +12,7 @@ public class SceneTutorial : GameScene
     void Start()
     {
         room.Init();
+        AudioManager.Instance.ApplyMusicTrackPreset("EggRoom");
     }
 
     private void Update()
