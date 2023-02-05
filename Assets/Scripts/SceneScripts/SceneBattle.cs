@@ -19,7 +19,7 @@ public class SceneBattle : GameScene
         hasEnded = false;
 
         Player.onDamage += OnPlayerHurt;
-        AudioManager.Instance.ApplyMusicTrackPreset("Battle");
+        
     }
 
     private void OnDestroy()

@@ -42,6 +42,9 @@ public class Room : MonoBehaviour
 
         GlobalInfo.canAttack = true;
         GlobalInfo.canWalk = true;
+
+        if(enemyCount > 0)
+            AudioManager.Instance.ApplyMusicTrackPreset("Battle");
     }
 
     [ContextMenu("Open Door")]

@@ -9,9 +9,13 @@ public class SceneBabymaker : GameScene
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.ApplyMusicTrackPreset("Merge", 4);
+
         GlobalInfo.Parentage p = GlobalInfo.ancestry[GlobalInfo.ancestry.Count-1];
         CreateCharacter(p.Alpha, A);    
         CreateCharacter(p.Beta, B);
+
+        
     }
 
     // Update is called once per frame
