@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BodyGenes:
   - {fileID: 2095818541855154061, guid: fa4ff435f81d5684bbf655e993b278f7, type: 3}
+  - {fileID: 2095818541855154061, guid: 61030a4069e995e4b9d49cd3d2509867, type: 3}
   LegsGenes:
   - {fileID: 5368798962159536980, guid: 067c3560896859649b47caacb9d83275, type: 3}
+  - {fileID: 5368798962159536980, guid: 894f0fb6d3c2f2d4a886b569d5c305c8, type: 3}
   HeadGenes:
   - {fileID: -1713318717368734304, guid: 4ca73ca8f7c2601458b9290f73c0fad0, type: 3}
+  - {fileID: -1713318717368734304, guid: e2d74dd24df985f43ab6431002cb9ac0, type: 3}
   ArmGenes:
   - {fileID: 1885695284974694993, guid: 0a08d74a4f34637499f19c559c4a0138, type: 3}
   - {fileID: 3167153162701803835, guid: 68993365413154c4893cf8144a44c027, type: 3}

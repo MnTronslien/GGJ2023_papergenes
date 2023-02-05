@@ -45,10 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingGenome:
-    BodyGene: {fileID: 1474581210039793149, guid: 8cf47dd1eeb4cec42a671da71cd28fd6,
+    BodyGene: {fileID: 2095818541855154061, guid: fa4ff435f81d5684bbf655e993b278f7,
       type: 3}
-    HeadGene: {fileID: 0}
-    LegsGene: {fileID: 0}
-    LeftArmGene: {fileID: 0}
-    RightArmGene: {fileID: 0}
+    LegsGene: {fileID: 5368798962159536980, guid: 067c3560896859649b47caacb9d83275,
+      type: 3}
+    HeadGene: {fileID: -1713318717368734304, guid: 4ca73ca8f7c2601458b9290f73c0fad0,
+      type: 3}
+    LeftArmGene: {fileID: 1885695284974694993, guid: e24c73365efccc5408caea68d7768b30,
+      type: 3}
+    RightArmGene: {fileID: 1885695284974694993, guid: 0a08d74a4f34637499f19c559c4a0138,
+      type: 3}
   gameTrack: {fileID: 11400000, guid: 05544c3715e526042a8557bffca26902, type: 2}
