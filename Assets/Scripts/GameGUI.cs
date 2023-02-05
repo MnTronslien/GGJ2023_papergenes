@@ -22,4 +22,9 @@ public class GameGUI : MonoBehaviour
     {
         screenBlood.alpha = 1 - percent;
     }
+
+    private void OnGUI()
+    {
+        GUILayout.Label("GameGUI.cs: " + GlobalInfo.currentHealth + " / " + GlobalInfo.playerGenome.GetMaxHealth());
+    }
 }

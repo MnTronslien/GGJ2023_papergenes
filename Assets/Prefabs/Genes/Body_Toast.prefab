@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3167153162701803833}
   - component: {fileID: 3167153162701803830}
   - component: {fileID: 3167153162701803831}
-  - component: {fileID: 3167153162701803835}
+  - component: {fileID: 1474581210039793149}
   m_Layer: 0
-  m_Name: SlugArms
+  m_Name: Body_Toast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &3167153162701803835
+--- !u!114 &1474581210039793149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,13 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3167153162701803828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05e955de60e4fcf4abd08c38dc80d3e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 17e0bdaa9289599428fdbcc33ffe4898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 5
-  width: 0.2
-  damage: 5
-  hitboxEffect: {fileID: 769987705865654616, guid: 4775e681bb45882419125920f0722fe9,
-    type: 3}
-  particleSound: {fileID: 11400000, guid: 59d30fe6f004c9b41b4738eb811c6ee1, type: 2}
-  attackSound: {fileID: 11400000, guid: c87567dc6f6fec44dba189703d0e37ee, type: 2}
+  health: 50

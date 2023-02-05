@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+    public Cinemachine.CinemachineVirtualCamera spawnCamera;
+
     public SlideAnimation entryDoor;
     public SlideAnimation mainDoor;
     public SlideAnimation bonusDoor;
@@ -19,8 +21,24 @@ public class Room : MonoBehaviour
         if(entryDoor != null)
             StartCoroutine(DoCloseDoor(entryDoor));
 
+        StartCoroutine(Intro());
+
         //return monster count
         return 0;
+    }
+
+    IEnumerator Intro()
+    {
+        yield return null;
+
+        spawnCamera.Priority = -1;
+
+        //TODO walk character 2 steps
+
+        //spawn monsters
+
+        GlobalInfo.canAttack = true;
+        GlobalInfo.canWalk = true;
     }
 
     [ContextMenu("Open Door")]

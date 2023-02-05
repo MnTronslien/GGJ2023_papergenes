@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d178675cb645791469be43b2df534e50, type: 3}
   m_Name: GeneDatabase
   m_EditorClassIdentifier: 
-  BodyGenes: []
+  BodyGenes:
+  - {fileID: 0}
   HeadGenes: []
   LegsGenes: []
-  LeftArmGenes: []
-  RightArmGenes: []
+  ArmGenes: []

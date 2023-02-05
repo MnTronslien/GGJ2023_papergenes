@@ -9,7 +9,7 @@ public class Genome
 {
 
     //Genome
-    public GameObject
+    public GeneExpression
     BodyGene,
     HeadGene,
     LegsGene,
@@ -83,14 +83,33 @@ public static Genome Combine(Genome genome1, Genome genome2)
         }
     }
 
+    public float GetMaxHealth()
+    {
+        float health = BodyGene.health;
+
+        if (HeadGene != null)
+            health += HeadGene.health;
+
+        if (LegsGene != null)
+            health += LegsGene.health;
+
+        if (RightArmGene != null)
+            health += RightArmGene.health;
+
+        if (LeftArmGene != null)
+            health += LeftArmGene.health;
+
+        return health;
+    }
+
     public static Genome CreateRandomGenome()
     {
         Genome genome = new Genome();
         genome.BodyGene = GeneDatabase.RandomBodyGene();
         genome.HeadGene = GeneDatabase.RandomHeadGene();
         genome.LegsGene = GeneDatabase.RandomLegsGene();
-        genome.LeftArmGene = GeneDatabase.RandomLeftArmGene();
-        genome.RightArmGene = GeneDatabase.RandomRightArmGene();
+        genome.LeftArmGene = GeneDatabase.RandomArmGene();
+        genome.RightArmGene = GeneDatabase.RandomArmGene();
         return genome;
     }
     private enum GeneStrength

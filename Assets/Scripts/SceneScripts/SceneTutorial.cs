@@ -6,16 +6,23 @@ public class SceneTutorial : GameScene
 {
     public Room room;
 
+    private int enemyCount;
+    private bool hasEnded;
+
     // Start is called before the first frame update
     void Start()
     {
-        room.Init();
-        room.OpenDoor();    
+        enemyCount = room.Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (enemyCount <= 0 && !hasEnded)
+        {
+            hasEnded = true;
+
+            room.OpenDoor();
+            room.OpenBonus();
+        }
     }
 }

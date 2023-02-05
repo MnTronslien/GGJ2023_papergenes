@@ -12,25 +12,25 @@ public class Player : MonoBehaviour
     public float turnThreshold;
     public SoundEffect hitSound;
 
-    [Header("Stats")]
-    public float currentHealth;
-    public int maxHealth { get { return 100; } } //Get from body parts
-
-    public Genome genome;
-
     private float dir;
     private Vector3 lastDir;
     private float lastX;
     private bool isDashing;
+    private bool isDancing;
 
     public static UnityEngine.Events.UnityAction<float> onDamage;
 
     // Start is called before the first frame update
     void Start()
     {
-        dir = 1;
-        currentHealth = maxHealth;
+        dir = 1;        
         onDamage?.Invoke(1);
+
+        if(GlobalInfo.playerGenome == null)
+        {
+            GlobalInfo.playerGenome = GlobalInfo.instance.startingGenome;
+            GlobalInfo.currentHealth = GlobalInfo.instance.startingGenome.GetMaxHealth();
+        }
     }
 
     // Update is called once per frame
@@ -38,28 +38,45 @@ public class Player : MonoBehaviour
     {
         if (!isDashing)
         {
-            agent.SetDestination(transform.position + new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
+            if(GlobalInfo.canWalk)
+            {
+                agent.SetDestination(transform.position + new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
+            }
+            
             animator.transform.rotation = Quaternion.identity;
 
             var d = (lastX - transform.position.x) * 10f;
             if (Mathf.Abs(d) > turnThreshold)
                 dir = d >= 0 ? -1 : 1;
 
-            if (Input.GetButtonDown("Fire1")){
-                //TODO: Move instantiation to start, this is just for debugging if they work
-                GameObject go = Instantiate(genome.LeftArmGene, transform.position, Quaternion.identity);
-                go.GetComponent<GeneExpression>().Act();
-                Destroy(go);
+            HandleBreeding();
 
+            if(!isDancing)
+            {
+                if (Input.GetButtonDown("Fire1") && GlobalInfo.playerGenome.LeftArmGene != null)
+                {
+                    //TODO: Move instantiation to start, this is just for debugging if they work
+                    GeneExpression go = Instantiate(GlobalInfo.playerGenome.LeftArmGene, transform.position, Quaternion.identity);
+                    go.Act();
+                    Destroy(go);
+                }
+
+                if (Input.GetButtonDown("Fire2") && GlobalInfo.playerGenome.RightArmGene != null)
+                {
+                    GeneExpression go = Instantiate(GlobalInfo.playerGenome.RightArmGene, transform.position, Quaternion.identity);
+                    go.Act();
+                    Destroy(go);
+                }
+
+                if (Input.GetButtonDown("Legs"))
+                    Dash(transform.position - lastDir);
+
+                if (Input.GetButtonDown("Head"))
+                    Special();
             }
-
-                
-            if (Input.GetButtonDown("Fire2"))
+            
+            if (Input.GetKeyDown(KeyCode.P))
                 GetHit(5);
-            if (Input.GetButtonDown("Legs"))
-                Dash(transform.position - lastDir);
-            if (Input.GetButtonDown("Head"))
-                Special();
         }
 
         transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, dir, Time.deltaTime * agent.angularSpeed), 1, 1);
@@ -68,9 +85,23 @@ public class Player : MonoBehaviour
         lastX = transform.position.x;
         lastDir = transform.position;
 
-        if(currentHealth > 0 && currentHealth < maxHealth)
+        if(GlobalInfo.currentHealth > 0 && GlobalInfo.currentHealth < GlobalInfo.instance.startingGenome.GetMaxHealth())
         {
-            currentHealth += Time.deltaTime;
+            GlobalInfo.currentHealth += Time.deltaTime;
+        }
+    }
+
+    private void HandleBreeding()
+    {
+        isDancing = Input.GetKey(KeyCode.B);
+        animator.SetBool("dance", isDancing);
+        if (isDancing)
+        {
+            //Find enemy, if there are more than one it fails
+            //increase enemy.charm
+            //if charm is > enemy.charmResist
+            GlobalInfo.Offspring(Genome.CreateRandomGenome()); //TODO replace with enemy
+            UnityEngine.SceneManagement.SceneManager.LoadScene(6);
         }
     }
 
@@ -79,14 +110,14 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Hit");
         hitSound.PlaySoundEffect(1 , transform.position);
 
-        currentHealth -= damage;
+        GlobalInfo.currentHealth -= damage;
 
-        if(currentHealth <= 0)
+        if(GlobalInfo.currentHealth <= 0)
         {
             onDamage?.Invoke(0);
         } else
         {
-            onDamage?.Invoke((float)currentHealth / (float)maxHealth);
+            onDamage?.Invoke((float)GlobalInfo.currentHealth / (float)GlobalInfo.instance.startingGenome.GetMaxHealth());
         }       
     }
 

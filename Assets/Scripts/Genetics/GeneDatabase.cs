@@ -7,30 +7,25 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GeneDatabase", menuName = "ScriptableObjects/GeneDatabase")]
 public class GeneDatabase : ScriptableObject {
 
-    public GameObject[] BodyGenes,
+    public GeneExpression[] BodyGenes,
     HeadGenes,
     LegsGenes,
-    LeftArmGenes,
-    RightArmGenes;
+    ArmGenes;
 
-    public static GameObject RandomBodyGene() {
+    public static GeneExpression RandomBodyGene() {
         return GeneDatabase.instance.BodyGenes[Random.Range(0, GeneDatabase.instance.BodyGenes.Length)];
     }
 
-    public static GameObject RandomHeadGene() {
+    public static GeneExpression RandomHeadGene() {
         return GeneDatabase.instance.HeadGenes[Random.Range(0, GeneDatabase.instance.HeadGenes.Length)];
     }
 
-    public static GameObject RandomLegsGene() {
+    public static GeneExpression RandomLegsGene() {
         return GeneDatabase.instance.LegsGenes[Random.Range(0, GeneDatabase.instance.LegsGenes.Length)];
     }
 
-    public static GameObject RandomLeftArmGene() {
-        return GeneDatabase.instance.LeftArmGenes[Random.Range(0, GeneDatabase.instance.LeftArmGenes.Length)];
-    }
-
-    public static GameObject RandomRightArmGene() {
-        return GeneDatabase.instance.RightArmGenes[Random.Range(0, GeneDatabase.instance.RightArmGenes.Length)];
+    public static GeneExpression RandomArmGene() {
+        return GeneDatabase.instance.ArmGenes[Random.Range(0, GeneDatabase.instance.ArmGenes.Length)];
     }
 
     public static GeneDatabase instance {
