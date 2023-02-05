@@ -24,13 +24,14 @@ public class Player : MonoBehaviour
     void Start()
     {
         dir = 1;        
-        onDamage?.Invoke(1);
-
+       
         if(GlobalInfo.playerGenome == null)
         {
             GlobalInfo.playerGenome = GlobalInfo.instance.startingGenome;
             GlobalInfo.currentHealth = GlobalInfo.instance.startingGenome.GetMaxHealth();
         }
+        
+        onDamage?.Invoke((float)GlobalInfo.currentHealth / (float)GlobalInfo.instance.startingGenome.GetMaxHealth());
     }
 
     // Update is called once per frame
