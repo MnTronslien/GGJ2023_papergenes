@@ -7,12 +7,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GeneDatabase", menuName = "ScriptableObjects/GeneDatabase")]
 public class GeneDatabase : ScriptableObject {
 
-    public GeneExpression[] BodyGenes,
-    HeadGenes,
-    LegsGenes,
-    ArmGenes;
+    public Torso[] BodyGenes;
+    public Leg[] LegsGenes;
+    public GeneExpressionFlippable[] HeadGenes, ArmGenes;
 
-    public static GeneExpression RandomBodyGene() {
+    public static Torso RandomBodyGene() {
         return GeneDatabase.instance.BodyGenes[Random.Range(0, GeneDatabase.instance.BodyGenes.Length)];
     }
 
@@ -20,11 +19,11 @@ public class GeneDatabase : ScriptableObject {
         return GeneDatabase.instance.HeadGenes[Random.Range(0, GeneDatabase.instance.HeadGenes.Length)];
     }
 
-    public static GeneExpression RandomLegsGene() {
+    public static Leg RandomLegsGene() {
         return GeneDatabase.instance.LegsGenes[Random.Range(0, GeneDatabase.instance.LegsGenes.Length)];
     }
 
-    public static GeneExpression RandomArmGene() {
+    public static GeneExpressionFlippable RandomArmGene() {
         return GeneDatabase.instance.ArmGenes[Random.Range(0, GeneDatabase.instance.ArmGenes.Length)];
     }
 
