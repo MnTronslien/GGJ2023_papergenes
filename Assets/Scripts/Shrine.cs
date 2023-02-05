@@ -21,26 +21,26 @@ public class Shrine : MonoBehaviour
 
     public void ClickHead()
     {
-        Debug.Log("Clicked Head");
+        GlobalInfo.playerGenome.MarkAsRecessive(Genome.GeneType.Head);
     }
 
     public void ClickLeftArm()
     {
-        Debug.Log("Clicked Left Arm");
+        GlobalInfo.playerGenome.MarkAsRecessive(Genome.GeneType.LeftArm);
     }
 
     public void ClickRightArm()
     {
-        Debug.Log("Clicked Right Arm");
+        GlobalInfo.playerGenome.MarkAsRecessive(Genome.GeneType.RightArm);
     }
 
     public void ClickTorso()
     {
-        Debug.Log("Clicked Torso");
+        GlobalInfo.playerGenome.MarkAsRecessive(Genome.GeneType.Body);
     }
 
     public void ClickLegs()
     {
-        Debug.Log("Clicked Legs");
+        GlobalInfo.playerGenome.MarkAsRecessive(Genome.GeneType.Legs);
     }
 }
