@@ -56,6 +56,8 @@ public static class AudioExtensions
         source.volume = volume * AudioManager.sfxVolume;
         source.Play();
         await Task.Delay((int)(clip.length * 1000));
+        if (!Application.isPlaying)
+            return;
         AudioManager.Instance.sfxTracks.Remove(source);
         Object.Destroy(go);   
     }
