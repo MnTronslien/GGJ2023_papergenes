@@ -37,20 +37,11 @@ public class Room : MonoBehaviour
 
         //TODO Monster logic
         //Then spawn monsters
-        //Then count monsters in room (in case of placed prefabs)
-
-        //Find all monsters and add them to list     
-        var monsters = new List<Monster>(FindObjectsOfType<Monster>());
-
-
-        //Then add a way for them to tell this script when they died
-
-
+        //Then count monsters in room (in case of pre-placed prefabs) and add to enemyCount
+        enemyCount = new List<Monster>(FindObjectsOfType<Monster>()).Count;
 
         GlobalInfo.canAttack = true;
         GlobalInfo.canWalk = true;
-        
-        enemyCount = monsters.Count;
     }
 
     [ContextMenu("Open Door")]
