@@ -39,6 +39,7 @@ class InputManager : Singleton<InputManager>{
         CursorWorldPosition = hitPosition;
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmoSelected (){
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(CursorWorldPosition, 0.1f);
@@ -48,5 +49,5 @@ class InputManager : Singleton<InputManager>{
         UnityEditor.Handles.Label(CursorWorldPosition, hitInfo.collider.gameObject.name);
 
     }
-
+#endif
 }

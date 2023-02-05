@@ -320,6 +320,31 @@ PrefabInstance:
       propertyPath: turnThreshold
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4746642445930333529, guid: 39ac5afa9dbeac54da6afe0069829112,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5265851
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746642445930333529, guid: 39ac5afa9dbeac54da6afe0069829112,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.22848769
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746642445930333529, guid: 39ac5afa9dbeac54da6afe0069829112,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.751176
+      objectReference: {fileID: 0}
+    - target: {fileID: 4746642445930333529, guid: 39ac5afa9dbeac54da6afe0069829112,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.32593885
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031650083602443110, guid: 39ac5afa9dbeac54da6afe0069829112,
+        type: 3}
+      propertyPath: m_Sources.Array.data[0].sourceTransform
+      value: 
+      objectReference: {fileID: 1730452361}
     - target: {fileID: 8540128586610992128, guid: 39ac5afa9dbeac54da6afe0069829112,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -658,7 +683,6 @@ MonoBehaviour:
   - {fileID: 1913810559083436478, guid: 273cd5d8e45726b438512e453add4c81, type: 3}
   - {fileID: 1913810559083436478, guid: cbfa3719cdf1e8848ab9a49eed1fb0c4, type: 3}
   room: {fileID: 0}
-  enemyCount: 0
 --- !u!4 &1865751200
 Transform:
   m_ObjectHideFlags: 0

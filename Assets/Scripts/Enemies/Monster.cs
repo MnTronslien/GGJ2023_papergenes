@@ -39,20 +39,24 @@ public class Monster : MonoBehaviour
             genome = Genome.CreateRandomGenome();
         }
 
-        legs = Instantiate(GlobalInfo.playerGenome.LegsGene, animator.transform, false);
-        torso = Instantiate(GlobalInfo.playerGenome.BodyGene, legs.torsoPos.position, Quaternion.identity, legs.transform);
-        head = Instantiate(GlobalInfo.playerGenome.HeadGene, torso.Head.position, Quaternion.identity, torso.transform);
-        leftArm = Instantiate(GlobalInfo.playerGenome.LeftArmGene, torso.FrontArm.position, Quaternion.identity, torso.transform);
-        rightArm = Instantiate(GlobalInfo.playerGenome.RightArmGene, torso.BackArm.position, Quaternion.identity, torso.transform);
+        if(animator != null)
+        {
+            legs = Instantiate(GlobalInfo.playerGenome.LegsGene, animator.transform, false);
+            torso = Instantiate(GlobalInfo.playerGenome.BodyGene, legs.torsoPos.position, Quaternion.identity, legs.transform);
+            head = Instantiate(GlobalInfo.playerGenome.HeadGene, torso.Head.position, Quaternion.identity, torso.transform);
+            leftArm = Instantiate(GlobalInfo.playerGenome.LeftArmGene, torso.FrontArm.position, Quaternion.identity, torso.transform);
+            rightArm = Instantiate(GlobalInfo.playerGenome.RightArmGene, torso.BackArm.position, Quaternion.identity, torso.transform);
 
-        leftArm.back.SetActive(false);
-        rightArm.front.SetActive(false);
+            leftArm.back.SetActive(false);
+            rightArm.front.SetActive(false);
 
-        legs.name = "Legs";
-        torso.name = "Torso";
-        head.name = "Head";
-        leftArm.name = "Front";
-        rightArm.name = "Back";
+            legs.name = "Legs";
+            torso.name = "Torso";
+            head.name = "Head";
+            leftArm.name = "Front";
+            rightArm.name = "Back";
+        }
+        
     }
 
     private void NameMonster()
@@ -86,6 +90,9 @@ name = monsterNames[UnityEngine.Random.Range(0, monsterNames.Count)];
 
     async void Update()
     {
+        if (agent == null)
+            return;
+
         //Move towards the player and wait until we are close enough to attack
         agent.SetDestination(player.transform.position);
         while (Vector3.Distance(transform.position, player.transform.position) > MaxAttackDistance)

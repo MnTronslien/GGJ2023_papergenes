@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
                 agent.SetDestination(transform.position + new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
             }
 
-            animator.transform.rotation = Quaternion.identity;
+            animator.transform.localRotation = Quaternion.identity;
 
             var d = (lastX - transform.position.x) * 10f;
             if (Mathf.Abs(d) > turnThreshold)
@@ -130,11 +130,14 @@ public class Player : MonoBehaviour
         animator.SetBool("dance", isDancing);
         if (isDancing)
         {
-            //Find enemy, if there are more than one it fails
-            //increase enemy.charm
-            //if charm is > enemy.charmResist
-            GlobalInfo.Offspring(Genome.CreateRandomGenome()); //TODO replace with enemy
-            UnityEngine.SceneManagement.SceneManager.LoadScene(6);
+            var enemies = FindObjectsOfType<Monster>();
+            if(enemies.Length == 0)
+            {
+                //increase enemy.charm
+                //if charm is > enemy.charmResist
+                GlobalInfo.Offspring(Genome.CreateRandomGenome()); //TODO replace with enemy
+                UnityEngine.SceneManagement.SceneManager.LoadScene(6);
+            }
         }
     }
 

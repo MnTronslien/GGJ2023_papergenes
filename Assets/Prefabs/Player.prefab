@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3307664424056048181}
   - component: {fileID: 3307664424056048183}
   - component: {fileID: 1565808495}
-  - component: {fileID: 962152600}
+  - component: {fileID: 1565808496}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -87,7 +87,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &962152600
+--- !u!54 &1565808496
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,7 +187,7 @@ Transform:
   - {fileID: 4929340186043135974}
   m_Father: {fileID: 3307664424056048180}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 5.86, z: 0}
 --- !u!1183024399 &5031650083602443110
 LookAtConstraint:
   m_ObjectHideFlags: 0
@@ -200,8 +200,10 @@ LookAtConstraint:
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_RotationOffset: {x: 0, y: 0, z: 0}
   m_Roll: 0
-  m_WorldUpObject: {fileID: 0}
+  m_WorldUpObject: {fileID: 3307664424056048180}
   m_UseUpObject: 0
-  m_IsContraintActive: 0
+  m_IsContraintActive: 1
   m_IsLocked: 0
-  m_Sources: []
+  m_Sources:
+  - sourceTransform: {fileID: 0}
+    weight: 1
