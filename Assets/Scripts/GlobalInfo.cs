@@ -30,7 +30,7 @@ public class GlobalInfo : MonoBehaviour
     public Genome startingGenome;
 
     //Music
-    public static MusicTrack gameTrack;
+    public MusicTrack gameTrack;
 
 
     private void Awake()
@@ -43,7 +43,12 @@ public class GlobalInfo : MonoBehaviour
 
         instance = this;
 
+        //Dont play music if no music is assigned
+        if (gameTrack == null){
+            Debug.Log("Please assign a music track to the GlobalInfo script");
+        }
         gameTrack.PlayMusicTrack(0);
+
 
     }
 

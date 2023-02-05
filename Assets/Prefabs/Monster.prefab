@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3307664424056048180}
-  - component: {fileID: 3307664424056048181}
   - component: {fileID: 3307664424056048183}
   - component: {fileID: 1565808495}
   - component: {fileID: 962152600}
+  - component: {fileID: 2988666984740757442}
   m_Layer: 3
   m_Name: Monster
   m_TagString: Untagged
@@ -36,29 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3307664424056048181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3307664424056048178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76cd96cef6d22fd4d9f982ec9d890a79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 3053480948318115588}
-  turnThreshold: 0.01
-  hitSound: {fileID: 11400000, guid: 99c254461a118d64e8991dd7e35bda2a, type: 2}
-  currentHealth: 0
-  genome:
-    BodyGene: {fileID: 0}
-    HeadGene: {fileID: 0}
-    LegsGene: {fileID: 0}
-    LeftArmGene: {fileID: 3167153162701803828, guid: 68993365413154c4893cf8144a44c027,
-      type: 3}
-    RightArmGene: {fileID: 0}
 --- !u!136 &3307664424056048183
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -111,6 +88,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &2988666984740757442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3307664424056048178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83db37a3431c24241a3c184f533317de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3307664424163087905
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +162,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c518b64eb76137145a21e440c8a1b494, type: 2}
+  - {fileID: 2100000, guid: 8222729e9f6b4364da5df5f2fdbfde61, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

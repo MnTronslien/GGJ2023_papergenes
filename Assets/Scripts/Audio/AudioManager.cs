@@ -35,6 +35,13 @@ public class AudioManager : Singleton<AudioManager>
     //Then apply the preset to the current music track
     public void ApplyMusicTrackPreset(string presetName, float duration = 2)
     {
+        //Check if the current music track is null
+        if (currentMusicTrack == null)
+        {
+            Debug.LogWarning("No current music track");
+            return;
+        }
+
         //Find the preset
         VolumePreset preset = currentMusicTrack.LayerPresets.Find(x => x.name.ToLower() == presetName.ToLower());
         if (preset == null)
@@ -147,6 +154,8 @@ public static class AudioExtensions
     //Make a static public method that plays a music track
     public static void PlayMusicTrack(this MusicTrack track, float volume = 1)
     {
+        //Set the current music track
+        AudioManager.Instance.currentMusicTrack = track;
         //If there is any musictracklayers playing, destroy them all
         if (AudioManager.Instance.musicTrackLayers.Count > 0)
         {
