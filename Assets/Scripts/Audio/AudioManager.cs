@@ -12,6 +12,7 @@ public class AudioManager : Singleton<AudioManager>
 
     //Track with layers
     public MusicTrack currentMusicTrack;
+    public VolumePreset Debug_VolumePreset;
     [HideInInspector] public List<AudioSource> musicTrackLayers = new List<AudioSource>();
 
 
@@ -35,7 +36,7 @@ public class AudioManager : Singleton<AudioManager>
     public void ApplyMusicTrackPreset(string presetName, float duration = 2)
     {
         //Find the preset
-        VolumePreset preset = currentMusicTrack.LayerPresets.Find(x => x.Name.ToLower() == presetName.ToLower());
+        VolumePreset preset = currentMusicTrack.LayerPresets.Find(x => x.name.ToLower() == presetName.ToLower());
         if (preset == null)
         {
             Debug.LogWarning($"No preset found with name {presetName}");
@@ -68,26 +69,19 @@ public class AudioManager : Singleton<AudioManager>
     }
 
     //Context menu method to cycle presets
-    [ContextMenu("Cycle Preset")]
-    public void CyclePreset()
+    [ContextMenu("Apply current Debug Preset")]
+    public void ApplyDebugPreset()
     {
-        //Find the index of the current preset
-        int index = currentMusicTrack.LayerPresets.IndexOf(currentMusicTrack.currentPreset);
-        //If the index is the last preset, set the index to 0
-        if (index == currentMusicTrack.LayerPresets.Count - 1)
-            index = 0;
-        //Otherwise, increment the index
-        else
-            index++;
-        //Apply the preset at the index
-        ApplyMusicTrackPreset(currentMusicTrack.LayerPresets[index].Name);
+        ApplyMusicTrackPreset(Debug_VolumePreset.name);
     }
+    
+  
 
     //Make a method to reload the current music track
     [ContextMenu("Reload Current Music Track")]
     public void ReloadCurrentMusicTrack()
     {
-        currentMusicTrack.PlayMusicTrack(1);
+        currentMusicTrack.PlayMusicTrack(0);
     }
 }
 

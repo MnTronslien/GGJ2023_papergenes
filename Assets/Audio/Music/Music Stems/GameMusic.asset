@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc86758288427e468825024b5b32d10, type: 3}
+  m_Name: GameMusic
+  m_EditorClassIdentifier: 
+  Layers:
+  - {fileID: 8300000, guid: 612c105edfd396240a28c9a0c9817560, type: 3}
+  - {fileID: 8300000, guid: 90da83ade5af06345b37917eb80f0470, type: 3}
+  - {fileID: 8300000, guid: ffbb4ffb49fdee64eba7d06446015532, type: 3}
+  - {fileID: 8300000, guid: 3ccac53aabfcb184884bcc52915ba5bf, type: 3}
+  - {fileID: 8300000, guid: 156936f34667ba64a84e14891b8b7ecd, type: 3}
+  - {fileID: 8300000, guid: e037ee7bb465dc240819b5c42be02b4d, type: 3}
+  - {fileID: 8300000, guid: 1427655a04c474540a9edc299e4e0fbc, type: 3}
+  - {fileID: 8300000, guid: 03d5fdcd682da8843a0bfd6ca3870075, type: 3}
+  - {fileID: 8300000, guid: d63ed2e6eb91a4e45a7dfc6c2444b037, type: 3}
+  currentPreset: {fileID: 0}
+  LayerCurrentVolumes: []
+  LayerPresets: []

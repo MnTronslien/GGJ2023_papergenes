@@ -3,6 +3,6 @@ using UnityEngine;
 [System.Serializable, CreateAssetMenu(fileName = "New Volume Preset", menuName = "Volume Preset")]
 public class VolumePreset : ScriptableObject
 {
-    public string Name;
+
     public float[] LayerVolume;
 }
