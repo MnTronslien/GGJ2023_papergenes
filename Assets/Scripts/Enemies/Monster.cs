@@ -49,6 +49,12 @@ public class Monster : MonoBehaviour
             leftArm = Instantiate(GlobalInfo.playerGenome.LeftArmGene, torso.FrontArm.position, Quaternion.identity, torso.transform);
             rightArm = Instantiate(GlobalInfo.playerGenome.RightArmGene, torso.BackArm.position, Quaternion.identity, torso.transform);
 
+            legs.transform.localRotation = Quaternion.identity;
+            torso.transform.localRotation = Quaternion.identity;
+            head.transform.localRotation = Quaternion.identity;
+            leftArm.transform.localRotation = Quaternion.identity;
+            rightArm.transform.localRotation = Quaternion.identity;
+
             leftArm.back.SetActive(false);
             rightArm.front.SetActive(false);
 
@@ -63,6 +69,12 @@ public class Monster : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        Vector3 a = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        Vector3 b = new Vector3(transform.position.x, -Camera.main.transform.position.y, -Camera.main.transform.position.z);
+        animator.transform.LookAt(Vector3.Lerp(a, b, GlobalInfo.instance.CharacterAngle));
+    }
 
 
 

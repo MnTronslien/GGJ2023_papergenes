@@ -28,6 +28,7 @@ public class GlobalInfo : MonoBehaviour
 
     // SETTINGS
     public Genome startingGenome;
+    [Range(0,1)]public float CharacterAngle;
 
     //Music
     public MusicTrack gameTrack;

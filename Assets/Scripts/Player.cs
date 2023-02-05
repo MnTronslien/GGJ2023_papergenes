@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     public static UnityEngine.Events.UnityAction<float> onDamage;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         dir = 1;
 
@@ -46,6 +46,12 @@ public class Player : MonoBehaviour
         leftArm = Instantiate(GlobalInfo.playerGenome.LeftArmGene, torso.FrontArm.position, Quaternion.identity, torso.transform);
         rightArm = Instantiate(GlobalInfo.playerGenome.RightArmGene, torso.BackArm.position, Quaternion.identity, torso.transform);
 
+        legs.transform.localRotation = Quaternion.identity;
+        torso.transform.localRotation = Quaternion.identity;
+        head.transform.localRotation = Quaternion.identity;
+        leftArm.transform.localRotation = Quaternion.identity;
+        rightArm.transform.localRotation = Quaternion.identity;
+
         leftArm.back.SetActive(false);
         rightArm.front.SetActive(false);
 
@@ -60,13 +66,15 @@ public class Player : MonoBehaviour
         head.name = "Head";
         leftArm.name = "Front";
         rightArm.name = "Back";
-
-        onDamage?.Invoke((float)GlobalInfo.currentHealth / (float)GlobalInfo.instance.startingGenome.GetMaxHealth());
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 a = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+        Vector3 b = new Vector3(transform.position.x, transform.position.y - Camera.main.transform.position.y, transform.position.z- Camera.main.transform.position.z);
+        animator.transform.LookAt(Vector3.Lerp(a, b, GlobalInfo.instance.CharacterAngle));
+
         if (!isDashing)
         {
             if (GlobalInfo.canWalk)
@@ -74,7 +82,7 @@ public class Player : MonoBehaviour
                 agent.SetDestination(transform.position + new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
             }
 
-            animator.transform.localRotation = Quaternion.identity;
+            //animator.transform.localRotation = Quaternion.identity;
 
             var d = (lastX - transform.position.x) * 10f;
             if (Mathf.Abs(d) > turnThreshold)
@@ -154,7 +162,8 @@ public class Player : MonoBehaviour
         }
         else
         {
-            onDamage?.Invoke((float)GlobalInfo.currentHealth / (float)GlobalInfo.instance.startingGenome.GetMaxHealth());
+            Debug.Log($"C: {GlobalInfo.currentHealth} / {GlobalInfo.playerGenome.GetMaxHealth()}");
+            onDamage?.Invoke((float)GlobalInfo.currentHealth / (float)GlobalInfo.playerGenome.GetMaxHealth()); 
         }
     }
 

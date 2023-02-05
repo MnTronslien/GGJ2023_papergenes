@@ -767,7 +767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 680362118}
-  shrine: {fileID: 0}
+  shrine: {fileID: 656920161}
 --- !u!4 &211183358
 Transform:
   m_ObjectHideFlags: 0

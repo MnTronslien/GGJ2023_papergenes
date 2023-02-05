@@ -29,6 +29,9 @@ public class Shrine : MonoBehaviour
         var p = post.emission;
         p.enabled = false;
 
+        GUI.alpha = 0;
+
+
         player = FindObjectOfType<Player>();
     }
 

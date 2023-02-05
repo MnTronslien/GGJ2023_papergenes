@@ -55,4 +55,5 @@ MonoBehaviour:
       type: 3}
     RightArmGene: {fileID: 6526318321108870045, guid: 0a08d74a4f34637499f19c559c4a0138,
       type: 3}
+  CharacterAngle: 0.1
   gameTrack: {fileID: 11400000, guid: 05544c3715e526042a8557bffca26902, type: 2}

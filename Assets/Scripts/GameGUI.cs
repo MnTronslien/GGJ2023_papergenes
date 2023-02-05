@@ -10,6 +10,7 @@ public class GameGUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        OnPlayerHurt(GlobalInfo.currentHealth / GlobalInfo.playerGenome.GetMaxHealth());
         Player.onDamage += OnPlayerHurt;
     }
 
