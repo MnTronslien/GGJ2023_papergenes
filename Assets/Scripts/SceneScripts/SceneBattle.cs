@@ -8,7 +8,6 @@ public class SceneBattle : GameScene
 
     [Header("pr")]
     public Room room;
-    public int enemyCount;
 
     private bool hasEnded;
 
@@ -16,7 +15,7 @@ public class SceneBattle : GameScene
     {
         int r = Random.Range(0, rooms.Length);
         room = Instantiate(rooms[r]);
-        enemyCount = room.Init();
+        room.Init();
         hasEnded = false;
 
         Player.onDamage += OnPlayerHurt;
@@ -29,7 +28,7 @@ public class SceneBattle : GameScene
 
     private void Update()
     {
-        if(enemyCount <= 0 && !hasEnded)
+        if(room.enemyCount <= 0 && !hasEnded)
         {
             hasEnded = true;
 

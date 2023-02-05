@@ -13,18 +13,18 @@ public class Room : MonoBehaviour
     public AudioClip doorOpenSound;
     [Tooltip("How much sooner than the sound should the door finish animating")]
     public float doorMoveFinishOffset = 0.5f;
+    public int enemyCount;
 
     //TODO bonus door requirements
 
-    public int Init()
+    public void Init()
     {
         if(entryDoor != null)
             StartCoroutine(DoCloseDoor(entryDoor));
 
+        enemyCount=1;
         StartCoroutine(Intro());
 
-        //return monster count
-        return 0;
     }
 
     IEnumerator Intro()
@@ -35,10 +35,17 @@ public class Room : MonoBehaviour
 
         //TODO walk character 2 steps
 
-        //spawn monsters
+//TODO Monster logic
+        //Then spawn monsters
+        //Then count monsters in room (in case of placed prefabs)
+        //Then add a way for them to tell this script when they died
+
+
 
         GlobalInfo.canAttack = true;
         GlobalInfo.canWalk = true;
+
+        enemyCount = 100;
     }
 
     [ContextMenu("Open Door")]
