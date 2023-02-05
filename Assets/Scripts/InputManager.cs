@@ -39,7 +39,7 @@ class InputManager : Singleton<InputManager>{
         CursorWorldPosition = hitPosition;
     }
 
-    private void OnDrawGizmos(){
+    private void OnDrawGizmoSelected (){
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(CursorWorldPosition, 0.1f);
         Gizmos.DrawLine(MainCamera.transform.position, CursorWorldPosition);

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 public class ChutuluArms : Arm
 {
-    public float width = 0.2f; 
+    
 
     public GameObject hitboxEffect;
     public SoundEffect particleSound;
     public SoundEffect attackSound;
+
+    public float width = 0.2f; 
 
     public override async Task Act(Vector3 aimDirection)
     {

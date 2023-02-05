@@ -50,7 +50,7 @@ public class Monster : MonoBehaviour
 
         legs.name = "Legs";
         torso.name = "Torso";
-       head.name = "Head";
+        head.name = "Head";
         leftArm.name = "Front";
         rightArm.name = "Back";
     }
@@ -101,13 +101,13 @@ name = monsterNames[UnityEngine.Random.Range(0, monsterNames.Count)];
 
 
         //Now that you are close enough, attack with the longest ranged attack
-        if (genome.LeftArmGene.length > genome.RightArmGene.length)
+        if (leftArm.length > rightArm.length)
         {
-           await genome.LeftArmGene.Act(aimDir);
+           await leftArm.Act(aimDir);
         }
         else
         {
-           await genome.RightArmGene.Act(aimDir);
+           await rightArm.Act(aimDir);
         }
         //Await a short delay
         await Task.Delay(500);
@@ -116,22 +116,23 @@ name = monsterNames[UnityEngine.Random.Range(0, monsterNames.Count)];
         //If the minimum attack is also in range, then attack with that too
         if (Vector3.Distance(transform.position, player.transform.position) < MinAttackDistance)
         {
-            if (genome.LeftArmGene.length < genome.RightArmGene.length)
+            if (leftArm.length < rightArm.length)
             {
-                await genome.LeftArmGene.Act(aimDir);
+                await leftArm.Act(aimDir);
             }
             else
             {
-                await genome.RightArmGene.Act(aimDir);
+                await rightArm.Act(aimDir);
             }
         }
-        await Task.Delay(500);
+        await Task.Delay(1500);
         //Break if not in play mode
         if (!Application.isPlaying) return;
 
     }
     public void OnDestroy()
     {
+        if (!Application.isPlaying) return;
         //Destroy the monster
         //Find room script and tell it that we died
         FindAnyObjectByType<Room>().enemyCount--;

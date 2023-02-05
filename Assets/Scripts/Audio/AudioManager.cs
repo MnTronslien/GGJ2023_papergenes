@@ -141,6 +141,12 @@ public static class AudioExtensions
     //Make a static public method that plays a sound effect
     public static void PlaySoundEffect(this SoundEffect effect, float volume, Vector3 worldSpacePos)
     {
+        //Stopif not in play mode
+        if (!Application.isPlaying)
+        {
+            Debug.LogWarning("Not in play mode, discarding");
+            return;
+        }
         //Select a random clip that isnt the same as last played
         int index = Random.Range(0, effect.clips.Length);
         while (index == effect.lastPlayed && effect.clips.Length > 1){

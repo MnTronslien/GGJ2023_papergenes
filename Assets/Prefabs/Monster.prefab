@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1565808495}
   - component: {fileID: 962152600}
   - component: {fileID: 2988666984740757442}
+  - component: {fileID: 3823625768571624567}
   m_Layer: 3
   m_Name: Monster
   m_TagString: Untagged
@@ -60,7 +61,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 0
   m_Acceleration: 30
   avoidancePriority: 50
   m_AngularSpeed: 25
@@ -109,6 +110,20 @@ MonoBehaviour:
   player: {fileID: 0}
   agent: {fileID: 1565808495}
   animator: {fileID: 3053480948318115588}
+--- !u!114 &3823625768571624567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3307664424056048178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d5de3f6adf55204d8522de6eb58c879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  DeathSound: {fileID: 11400000, guid: 049e23dcd27884c4a91c2e827df13cf6, type: 2}
 --- !u!1 &3447908672973636834
 GameObject:
   m_ObjectHideFlags: 0
