@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
         if (isDancing)
         {
             var enemies = FindObjectsOfType<Monster>();
-            if(enemies.Length == 0)
+            if(enemies.Length == 1)
             {
                 //increase enemy.charm
                 //if charm is > enemy.charmResist
