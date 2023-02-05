@@ -12,6 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc86758288427e468825024b5b32d10, type: 3}
   m_Name: PlaceholderMusic
   m_EditorClassIdentifier: 
-  Layers: []
+  Layers:
+  - {fileID: 8300000, guid: 3749a5e42fa06024d99b5073432b8712, type: 3}
+  - {fileID: 8300000, guid: f6f72ae63b469ca45ad5fbe900203a74, type: 3}
+  currentPreset:
+    Name: 
+    LayerVolume: []
   LayerCurrentVolumes: []
-  LayerPresets: []
+  LayerPresets:
+  - Name: Bass
+    LayerVolume:
+    - 1
+    - 0
+  - Name: Toybox
+    LayerVolume:
+    - 0
+    - 1
+  - Name: All
+    LayerVolume:
+    - 1
+    - 1
+  - Name: Silence
+    LayerVolume:
+    - 0
+    - 0
