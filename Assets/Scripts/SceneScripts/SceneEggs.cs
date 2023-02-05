@@ -7,12 +7,14 @@ public class SceneEggs : GameScene
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(Intro());
     }
 
     // Update is called once per frame
-    void Update()
+    IEnumerator Intro()
     {
-        
+        yield return new WaitForSeconds(4);
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
 }
