@@ -1080,6 +1080,8 @@ MonoBehaviour:
   player: {fileID: 0}
   agent: {fileID: 0}
   animator: {fileID: 0}
+  charm: 0
+  charmTollerance: 5
 --- !u!1001 &1404545854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1700,10 +1702,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1585653155}
     m_Modifications:
-    - target: {fileID: 1781084019, guid: 43477cc814ce1ff4f8cc2596310d70ea, type: 3}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1112043397736780575, guid: 43477cc814ce1ff4f8cc2596310d70ea,
         type: 3}
       propertyPath: m_Name

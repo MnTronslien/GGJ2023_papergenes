@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
 
 
     public static UnityEngine.Events.UnityAction<float> onDamage;
+    public static UnityEngine.Events.UnityAction<float> onHeal;
 
     // Start is called before the first frame update
     void Awake()
@@ -143,9 +144,11 @@ public class Player : MonoBehaviour
         lastX = transform.position.x;
         lastDir = transform.position;
 
+        //REgen
         if (GlobalInfo.currentHealth > 0 && GlobalInfo.currentHealth < GlobalInfo.instance.startingGenome.GetMaxHealth())
         {
             GlobalInfo.currentHealth += Time.deltaTime;
+            onHeal?.Invoke((float)GlobalInfo.currentHealth / (float)GlobalInfo.playerGenome.GetMaxHealth());
         }
     }
 

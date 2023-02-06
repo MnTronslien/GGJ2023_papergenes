@@ -14,6 +14,10 @@ public class Monster : MonoBehaviour
     public float charm;
     public float charmTollerance = 5;
 
+    private float dir;
+    private Vector3 lastDir;
+    private float lastX;
+
 
     Leg legs;
     Torso torso;
@@ -41,11 +45,11 @@ public class Monster : MonoBehaviour
 
         if (animator != null)
         {
-            legs = Instantiate(GlobalInfo.playerGenome.LegsGene, animator.transform, false);
-            torso = Instantiate(GlobalInfo.playerGenome.BodyGene, legs.torsoPos.position, Quaternion.identity, legs.transform);
-            head = Instantiate(GlobalInfo.playerGenome.HeadGene, torso.Head.position, Quaternion.identity, torso.transform);
-            leftArm = Instantiate(GlobalInfo.playerGenome.LeftArmGene, torso.FrontArm.position, Quaternion.identity, torso.transform);
-            rightArm = Instantiate(GlobalInfo.playerGenome.RightArmGene, torso.BackArm.position, Quaternion.identity, torso.transform);
+            legs = Instantiate(genome.LegsGene, animator.transform, false);
+            torso = Instantiate(genome.BodyGene, legs.torsoPos.position, Quaternion.identity, legs.transform);
+            head = Instantiate(genome.HeadGene, torso.Head.position, Quaternion.identity, torso.transform);
+            leftArm = Instantiate(genome.LeftArmGene, torso.FrontArm.position, Quaternion.identity, torso.transform);
+            rightArm = Instantiate(genome.RightArmGene, torso.BackArm.position, Quaternion.identity, torso.transform);
 
             legs.transform.localRotation = Quaternion.identity;
             torso.transform.localRotation = Quaternion.identity;
@@ -77,9 +81,21 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
+        //TIlt
         Vector3 a = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         Vector3 b = new Vector3(transform.position.x, -Camera.main.transform.position.y, -Camera.main.transform.position.z);
         animator.transform.LookAt(Vector3.Lerp(a, b, GlobalInfo.instance.CharacterAngle));
+
+        //Calculate dir
+        var d = (lastX - transform.position.x) * 10f;
+        if (Mathf.Abs(d) > 0.1f)
+            dir = d >= 0 ? -1 : 1;
+
+        transform.localScale = new Vector3(Mathf.Lerp(transform.localScale.x, dir, Time.deltaTime * agent.angularSpeed), 1, 1);
+
+        animator.SetFloat("Speed", Mathf.Abs(lastX - transform.position.x) * 10f);
+        lastX = transform.position.x;
+        lastDir = transform.position;
     }
 
 
