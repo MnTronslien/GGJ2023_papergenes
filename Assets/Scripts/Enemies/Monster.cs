@@ -122,9 +122,9 @@ public class Monster : MonoBehaviour
                 return;
 
             //Move towards the player and wait until we are close enough to attack
-            agent.SetDestination(player.transform.position);
             while (Vector3.Distance(transform.position, player.transform.position) > MaxAttackDistance)
             {
+                agent.SetDestination(player.transform.position);
                 await Task.Delay(100);
                 if (!Application.isPlaying) return;
                 if (this == null) return;
