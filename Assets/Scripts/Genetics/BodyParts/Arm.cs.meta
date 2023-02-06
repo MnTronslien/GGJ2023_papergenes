@@ -3,7 +3,13 @@ guid: 898ffc2189282064b9c5b49675527e58
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - front: {instanceID: 0}
+  - back: {instanceID: 0}
+  - hitboxEffect: {fileID: 769987705865654616, guid: 4775e681bb45882419125920f0722fe9,
+      type: 3}
+  - particleSound: {fileID: 11400000, guid: 99c254461a118d64e8991dd7e35bda2a, type: 2}
+  - attackSound: {fileID: 11400000, guid: be6512b3fefa67e42a9eba6cef7569c6, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
