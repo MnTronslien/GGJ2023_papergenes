@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public Animator animator;
     public float turnThreshold;
     public SoundEffect hitSound;
+    public ParticleSystem hearticles;
+    public float heartSpeed;
 
     private float dir;
     private Vector3 lastDir;
@@ -67,6 +69,8 @@ public class Player : MonoBehaviour
         leftArm.name = "Front";
         rightArm.name = "Back";
 
+        var e = hearticles.emission;
+        e.enabled = false;
         animator.gameObject.SetActive(false);
     }
 
@@ -78,6 +82,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var enemies = FindObjectsOfType<Monster>();
+        if(enemies.Length == 1)
+        {
+            hearticles.transform.position = Vector3.Lerp(transform.position+Vector3.up, enemies[0].transform.position+Vector3.up, Mathf.Repeat(Time.time * heartSpeed, 1));
+        }
+
         Vector3 a = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
         Vector3 b = new Vector3(transform.position.x, transform.position.y - Camera.main.transform.position.y, transform.position.z- Camera.main.transform.position.z);
         animator.transform.LookAt(Vector3.Lerp(a, b, GlobalInfo.instance.CharacterAngle));
@@ -141,11 +151,15 @@ public class Player : MonoBehaviour
 
     private void HandleBreeding()
     {
-        isDancing = Input.GetKey(KeyCode.B) || (Input.GetButtonDown("Fire1") && Input.GetButtonDown("Fire2"));
+        isDancing = Input.GetKey(KeyCode.B) || (Input.GetButton("Fire1") && Input.GetButton("Fire2"));
+
         animator.SetBool("dance", isDancing);
         var enemies = FindObjectsOfType<Monster>();
         if (enemies.Length == 1)
         {
+            var e = hearticles.emission;
+            e.enabled = isDancing;
+
             if (isDancing)
             {
                 enemies[0].charm += Time.deltaTime;
@@ -153,7 +167,7 @@ public class Player : MonoBehaviour
                 {
                     GlobalInfo.Offspring(enemies[0].genome);
                     UnityEngine.SceneManagement.SceneManager.LoadScene(6);
-                } 
+                }
             } else
             {
                 enemies[0].charm = 0;

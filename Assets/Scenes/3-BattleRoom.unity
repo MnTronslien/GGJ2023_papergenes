@@ -325,6 +325,16 @@ PrefabInstance:
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 
       objectReference: {fileID: 1730452361}
+    - target: {fileID: 7944138618022874197, guid: 39ac5afa9dbeac54da6afe0069829112,
+        type: 3}
+      propertyPath: EmissionModule.rateOverDistance.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8839132882944097865, guid: 39ac5afa9dbeac54da6afe0069829112,
+        type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39ac5afa9dbeac54da6afe0069829112, type: 3}
 --- !u!1 &1627768758
