@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void GetHit(int damage)
+    public void GetHit(int damage)
     {
         animator.SetTrigger("Hit");
         hitSound.PlaySoundEffect(1, transform.position);
