@@ -112,6 +112,9 @@ MonoBehaviour:
   animator: {fileID: 3053480948318115588}
   charm: 0
   charmTollerance: 5
+  log:
+    level: 3
+    context: {fileID: 2988666984740757442}
 --- !u!114 &3823625768571624567
 MonoBehaviour:
   m_ObjectHideFlags: 0

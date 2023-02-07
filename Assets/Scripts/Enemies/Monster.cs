@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class Monster : MonoBehaviour
 {
     public Genome genome;
@@ -30,9 +31,11 @@ public class Monster : MonoBehaviour
     private float MinAttackDistance => Mathf.Min(genome.LeftArmGene.length, genome.RightArmGene.length);
 
     Task UpdataLoop = null;
+    public Logger log;
 
     void Awake()
     {
+        log.context = this;
         NameMonster();
         //Get the player
         player = FindAnyObjectByType<Player>().gameObject;
@@ -98,8 +101,90 @@ public class Monster : MonoBehaviour
         lastDir = transform.position;
     }
 
+    private async Task AsyncUpdate()
+    {
+        log.LogInfo($"Starting Async Update for {name}");
+        while (gameObject != null)
+        {
+            if (agent == null){
+               log.LogWarning("Agent is null, stopping update loop");
+                return;
+            }           
 
+            //Move towards the player and wait until we are close enough to attack
+            while (Vector3.Distance(transform.position, player.transform.position) > MaxAttackDistance)
+            {
+                log.LogDebug($"Moving {name} towards player. Distance is {Vector3.Distance(transform.position, player.transform.position)}");
+                agent.SetDestination(player.transform.position);
+                await Task.Delay(100);
+                if (!Application.isPlaying) return;
+                if (this == null) return;
+            }
+            //Stop moving
+            log.LogInfo($"Stopping {name} from moving");
+            agent.isStopped = true;
 
+            //Calculate aim direction
+            log.LogInfo($"Calculating aim direction for {name}");
+            Vector3 aimDir = player.transform.position - transform.position;
+
+            //Now that you are close enough, attack with the longest ranged attack
+            log.LogInfo($"{name} is attacking with the longest ranged attack");
+            if (leftArm.length > rightArm.length)
+            {
+                log.LogDebug($"{name} is attacking with the left arm");
+                await leftArm.Act(aimDir);
+            }
+            else
+            {
+                log.LogDebug($"{name} is attacking with the right arm");
+                await rightArm.Act(aimDir);
+            }
+            //Await a short delay
+            log.LogInfo($"{name} is pausing between attacks");
+            await Task.Delay(1000);
+            //Break if not in play mode
+            if (!Application.isPlaying) return;
+            if (this == null) return;
+            //If the minimum attack is also in range, then attack with that too
+            log.LogInfo($"{name} is checking if it can attack with the other arm");
+            if (Vector3.Distance(transform.position, player.transform.position) < MinAttackDistance)
+            {
+                if (leftArm.length < rightArm.length)
+                {
+                    log.LogDebug($"{name} is attacking with the left arm");
+                    await leftArm.Act(aimDir);
+                }
+                else
+                {
+                    log.LogDebug($"{name} is attacking with the right arm");
+                    await rightArm.Act(aimDir);
+                }
+            }
+
+            await Task.Delay(500);
+            //Break if not in play mode
+            if (!Application.isPlaying) return;
+            if (this == null) return;
+
+            //Start moving again
+            log.LogInfo($"{name} is starting to move again");
+            agent.isStopped = false;
+        }
+    }
+    public void OnDestroy()
+    {
+
+        //Destroy the monster
+        //Find room script and tell it that we died
+        var room = FindAnyObjectByType<Room>();
+        //If room exist then tell it that we died
+        if (room != null)
+        {
+            room.enemyCount--;
+        }
+
+    }
 
     private void NameMonster()
     {
@@ -128,73 +213,5 @@ public class Monster : MonoBehaviour
     "Rampager"
 };
         name = monsterNames[UnityEngine.Random.Range(0, monsterNames.Count)];
-    }
-
-    private async Task AsyncUpdate()
-    {
-        while (gameObject != null)
-        {
-            if (agent == null)
-                return;
-
-            //Move towards the player and wait until we are close enough to attack
-            while (Vector3.Distance(transform.position, player.transform.position) > MaxAttackDistance)
-            {
-                agent.SetDestination(player.transform.position);
-                await Task.Delay(100);
-                if (!Application.isPlaying) return;
-                if (this == null) return;
-            }
-            //Stop moving
-            agent.isStopped = true;
-
-            //Calculate aim direction
-            Vector3 aimDir = player.transform.position - transform.position;
-
-
-            //Now that you are close enough, attack with the longest ranged attack
-            if (leftArm.length > rightArm.length)
-            {
-                await leftArm.Act(aimDir);
-            }
-            else
-            {
-                await rightArm.Act(aimDir);
-            }
-            //Await a short delay
-            await Task.Delay(1000);
-            //Break if not in play mode
-            if (!Application.isPlaying) return;
-            if (this == null) return;
-            //If the minimum attack is also in range, then attack with that too
-            if (Vector3.Distance(transform.position, player.transform.position) < MinAttackDistance)
-            {
-                if (leftArm.length < rightArm.length)
-                {
-                    await leftArm.Act(aimDir);
-                }
-                else
-                {
-                    await rightArm.Act(aimDir);
-                }
-            }
-            await Task.Delay(500);
-            //Break if not in play mode
-            if (!Application.isPlaying) return;
-            if (this == null) return;
-        }
-    }
-    public void OnDestroy()
-    {
-
-        //Destroy the monster
-        //Find room script and tell it that we died
-        var room = FindAnyObjectByType<Room>();
-        //If room exist then tell it that we died
-        if (room != null)
-        {
-            room.enemyCount--;
-        }
-
     }
 }

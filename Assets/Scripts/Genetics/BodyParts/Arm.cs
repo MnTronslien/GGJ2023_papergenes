@@ -28,6 +28,8 @@ public class Arm : GeneExpressionFlippable
     private Vector3 hitBoxCentre;
     private Quaternion aimDirectionStored;
 
+    public Logger logger;
+
     //Default arm behaviour copied rom ape behaviour
      override public async Task Act(Vector3 aimDirection)
     {
@@ -100,9 +102,20 @@ public class Arm : GeneExpressionFlippable
     void OnDrawGizmos()
     {
         if (!drawHitbox) return;
+        //Valdidate parameters
+
+try
+        {
         //Draw the hitbox to the screen
         Gizmos.color = Color.red;
         Gizmos.matrix = Matrix4x4.TRS(hitBoxCentre, aimDirectionStored, transform.localScale);
         Gizmos.DrawWireCube(Vector3.zero, Vector3.one * length);
+
+        }
+        catch (System.Exception e)
+        {
+            logger.LogWarning("Error drawing hitbox: " + e.Message);
+        }
+
     }
 }
