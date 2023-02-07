@@ -54,6 +54,6 @@ public class ChutuluArms : Arm
         }
      
     //Await atatck cooldown
-    await Task.Delay((int)(attckCooldown * 1000));
+    await Task.Delay((int)(attackCooldown * 1000));
     }
 }
