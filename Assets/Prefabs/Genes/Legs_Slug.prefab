@@ -46,8 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fc7b6381441f2c42a084487439b7d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   health: 0
   torsoPos: {fileID: 3155683623230009058}
+  baseSpeed: 1
 --- !u!1 &1941446780589262057
 GameObject:
   m_ObjectHideFlags: 0

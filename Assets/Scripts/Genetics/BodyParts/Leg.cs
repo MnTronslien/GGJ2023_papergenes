@@ -5,4 +5,5 @@ using UnityEngine;
 public class Leg : GeneExpression
 {
     public Transform torsoPos;
+    public float baseSpeed = 4;
 }

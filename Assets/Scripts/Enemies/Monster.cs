@@ -70,6 +70,9 @@ public class Monster : MonoBehaviour
             rightArm.name = "Back";
         }
 
+        //Set speed
+        agent.speed = genome.LegsGene.baseSpeed;
+
         UpdataLoop = AsyncUpdate();
 
         if (animator != null)

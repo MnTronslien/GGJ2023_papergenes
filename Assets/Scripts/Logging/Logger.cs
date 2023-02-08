@@ -1,3 +1,4 @@
+//Is it a good logger? I don't know - maybe?
 
 using UnityEngine;
 //Simple serializable class for logging

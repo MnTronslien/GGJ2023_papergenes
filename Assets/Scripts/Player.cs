@@ -77,6 +77,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        //Set player stats
+        agent.speed = legs.baseSpeed;
         animator.gameObject.SetActive(true);
     }
 
