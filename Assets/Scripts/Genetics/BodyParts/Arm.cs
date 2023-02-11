@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class Arm : GeneExpressionFlippable
 {
     public float length = 5;
-    
+
     public int damage = 1;
     public float knockbackForce = 5;
     public float attackCooldown = 0.5f;
@@ -16,13 +16,15 @@ public class Arm : GeneExpressionFlippable
     public SoundEffect particleSound;
     public SoundEffect attackSound;
 
-    private bool drawHitbox { 
+    private bool drawHitbox
+    {
         get { return drawTimer > 0; }
-        set{
+        set
+        {
             if (value)
                 drawTimer = 0.2f;
         }
-    }   
+    }
 
     private float drawTimer = 0.2f;
     private Vector3 hitBoxCentre;
@@ -31,7 +33,7 @@ public class Arm : GeneExpressionFlippable
     public Logger logger;
 
     //Default arm behaviour copied rom ape behaviour
-     override public async Task Act(Vector3 aimDirection)
+    override public async Task Act(Vector3 aimDirection)
     {
 
         attackSound.PlaySoundEffect(1, transform.position);
@@ -75,7 +77,7 @@ public class Arm : GeneExpressionFlippable
     {
         //Store hitbox information for the Gizmos
         hitBoxCentre = hitboxPosition;
-        aimDirectionStored = Quaternion.LookRotation( aimDirection);
+        aimDirectionStored = Quaternion.LookRotation(aimDirection);
         drawHitbox = true;
     }
 
@@ -102,14 +104,15 @@ public class Arm : GeneExpressionFlippable
     void OnDrawGizmos()
     {
         if (!drawHitbox) return;
+        if(!Application.isPlaying) return;
         //Valdidate parameters
 
-try
+        try
         {
-        //Draw the hitbox to the screen
-        Gizmos.color = Color.red;
-        Gizmos.matrix = Matrix4x4.TRS(hitBoxCentre, aimDirectionStored, transform.localScale);
-        Gizmos.DrawWireCube(Vector3.zero, Vector3.one * length);
+            //Draw the hitbox to the screen
+            Gizmos.color = Color.red;
+            Gizmos.matrix = Matrix4x4.TRS(hitBoxCentre, aimDirectionStored, transform.localScale);
+            Gizmos.DrawWireCube(Vector3.zero, Vector3.one * length);
 
         }
         catch (System.Exception e)
